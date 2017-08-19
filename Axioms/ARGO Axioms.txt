@@ -1,0 +1,80 @@
+%*************************************
+%     ARGO AXIOMS                    *
+%*************************************
+
+%*********************************
+%     CLASSES                    *
+%*********************************
+
+all x (ActOfArguing(x) -> exists y(LanguageAct(x) & Argument(y) & hasOutput(x,y) & all z ((Argument(z) & hasOutput(x,z))->z=y))). 
+%ARGO1.1
+
+all x (ActOfInferring(x) -> exists y(LanguageAct(x) & Statement(y) & hasInput(x,y) & exists z(Statement(z) & hasOutput(x,z)))).
+%ARGO1.2
+
+all x (ActOfConcluding(x) -> exists y(LanguageAct(x) & Statement(y) & hasOutput(x,y) & all z ((Statement(z) & hasOutput(x,z))->z=y))).
+%ARGO1.3
+
+all x (ActOfConcluding(x) -> exists y(Conclusion(y) & hasOutput(x,y))). 
+%ARGO1.4
+
+all x (ActOfArgumentCreation(x) -> exists y (Argument(y) & hasOutput(x,y))).
+%ARGO1.5
+
+all x (ActOfArgumentCreation(x) -> exists y (ActOfConcluding(y) & hasProcessPart(w,y))).
+%ARGO1.6
+
+all x (Argument(x) -> exists y exists t(Conclusion(y) & hasContinuantPartAt(x,y,t))).
+%ARGO1.7 (is this supposed to be with OWL or FOL?; removed restriction, throwing parsing (?) errors for some reason; ensure functional)
+
+all x (Argument(x) -> exists y (ActOfArgumentCreation(y) & hasOutput(y,x))). 
+%ARGO1.8
+
+all x (Premise(x) <-> (Statement(x) & exists z(ActOfInferring(z) & hasInput(z,y)))).
+%ARGO1.9
+
+all x (Premise(x) -> exists y exists t(Argument(y) & hasContinuantPartAt(y,x,t))).
+%ARGO1.10 (is this supposed to be with OWL or FOL?; removed restriction, throwing parsing (?) errors for some reason; ensure functional)
+
+all x (Premise(x) -> exists y(Argument(y) & hasArgumentContext(x,y) & all z((Argument(z) & hasArgumentContext(z,x))->z=y))).
+%ARGO1.11
+
+all x (Conclusion(x) <-> (Statement(x) & exists z(ActOfConcluding(z) & hasOutput(y,x)))).
+%ARGO1.12
+
+all x (Conclusion(x) -> exists y exists t(Argument(y) & hasContinuantPartAt(y,x,t))).
+%ARGO1.13(is this supposed to be with OWL or FOL?; removed restriction, throwing parsing (?) errors for some reason; ensure functional)
+
+all x (Conclusion(x) -> exists y(Argument(y) & hasArgumentContext(x,y) & exists z((Argument(z) & hasArgumentContext(z,x))-> z=y))).
+%ARGO1.14 (maybe need to relativize to times if FOL)
+
+all x (Supposition(x) <-> (Statement(x) & exists y(ActOfSupposing(y) & hasOutput(y,x)))).
+%ARGO1.15
+
+all x (Subconclusion(x) <-> exists x exists z(Premise(y) & ActOfInferring(z) & hasOutput(z,y) & (x=y))).
+%ARGO1.16 
+
+all x (Subconclusion(x) -> exists y (Argument(y) & hasArgumentContext(x,y) & all z((Argument(z) & hasArgumentContext(z,x))->z=y))). 
+%ARGO1.17
+
+%*********************************
+%     RELATIONS                  *
+%*********************************
+
+all x all y (defendedBy(x,y) -> (Statement(x) & Author(y))).
+all x all y (defendedBy(x,y) <-> defends(y,x)).
+all x all y (defendedBy(x,y) -> -defendedBy(y,x)).
+-(exists x(defendedBy(x,x))).
+
+all x all y (hasArgumentContext(x,y) -> (Statement(x) & Argument(y))).
+all x all y (hasArgumentContext(x,y) <-> isArgumentContextOf(y,x)).
+all x all y (hasArgumentContext(x,y) -> -hasArgumentContext(y,x)).
+all x all y ((hasArgumentContext(x,y) & hasArgumentContext(x,z))->y=z).
+-(exists x(hasArgumentContext(x,x))). 
+
+%*********************************
+%     A-BOX                      *
+%*********************************
+%Statement(a). 
+Premise(b). 
+%Conclusion(c). 

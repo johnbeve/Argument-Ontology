@@ -1,0 +1,155 @@
+============================== prooftrans ============================
+Prover9 (32) version Dec-2007, Dec 2007.
+Process 9620 was started by John on John,
+Sat Aug 19 15:38:49 2017
+The command was "/cygdrive/c/Program Files (x86)/Prover9-Mace4/bin-win32/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.05 (+ 0.01) seconds.
+% Length of proof is 62.
+% Level of proof is 14.
+% Maximum clause weight is 15.
+% Given clauses 168.
+
+3 (all x (ActOfConcluding(x) -> (exists y (LanguageAct(x) & Statement(y) & hasOutput(x,y) & (all z (Statement(z) & hasOutput(x,z) -> z = y)))))) # label(non_clause).  [assumption].
+6 (all x (ActOfArgumentCreation(x) -> (exists y (ActOfConcluding(y) & hasProcessPart(z,y))))) # label(non_clause).  [assumption].
+7 (all x (Argument(x) -> (exists y exists t (Conclusion(y) & hasContinuantPartAt(x,y,t))))) # label(non_clause).  [assumption].
+8 (all x (Argument(x) -> (exists y (ActOfArgumentCreation(y) & hasOutput(y,x))))) # label(non_clause).  [assumption].
+9 (all x (Premise(x) <-> Statement(x) & (exists y (ActOfInferring(y) & hasInput(y,z))))) # label(non_clause).  [assumption].
+10 (all x (Premise(x) -> (exists y exists t (Argument(y) & hasContinuantPartAt(y,x,t))))) # label(non_clause).  [assumption].
+11 (all x (Premise(x) -> (exists y (Argument(y) & hasArgumentContext(x,y) & (all z (Argument(z) & hasArgumentContext(z,x) -> z = y)))))) # label(non_clause).  [assumption].
+12 (all x (Conclusion(x) <-> Statement(x) & (exists y (ActOfConcluding(y) & hasOutput(z,x))))) # label(non_clause).  [assumption].
+13 (all x (Conclusion(x) -> (exists y exists t (Argument(y) & hasContinuantPartAt(y,x,t))))) # label(non_clause).  [assumption].
+16 (all x (Subconclusion(x) <-> (exists x exists y (Premise(z) & ActOfInferring(y) & hasOutput(y,z) & x = z)))) # label(non_clause).  [assumption].
+24 (all x all y (hasArgumentContext(x,y) -> -hasArgumentContext(y,x))) # label(non_clause).  [assumption].
+27 -Premise(x) | ActOfInferring(f11(y,x)).  [clausify(9)].
+33 Premise(x) | -Statement(x) | -ActOfInferring(y) | -hasInput(y,z).  [clausify(9)].
+35 Subconclusion(x) | -Premise(y) | -ActOfInferring(z) | -hasOutput(z,y) | y != u.  [clausify(16)].
+36 -ActOfArgumentCreation(x) | ActOfConcluding(f7(y,x)).  [clausify(6)].
+40 -ActOfConcluding(x) | -Statement(y) | -hasOutput(x,y) | y = f4(x).  [clausify(3)].
+43 -Conclusion(x) | ActOfConcluding(f15(y,x)).  [clausify(12)].
+44 Conclusion(x) | -Statement(x) | -ActOfConcluding(y) | -hasOutput(z,x).  [clausify(12)].
+45 -Argument(x) | ActOfArgumentCreation(f10(x)).  [clausify(8)].
+55 Conclusion(x) | -Statement(x) | -hasOutput(y,x) | -ActOfArgumentCreation(z).  [resolve(44,c,36,b)].
+57 -Premise(x) | Statement(x).  [clausify(9)].
+58 -Conclusion(x) | Statement(x).  [clausify(12)].
+64 Premise(x) | -Statement(x) | -hasInput(f11(y,z),u) | -Premise(z).  [resolve(33,c,27,b)].
+69 -Conclusion(x) | -Statement(y) | -hasOutput(f15(z,x),y) | y = f4(f15(z,x)).  [resolve(43,b,40,a)].
+73 Conclusion(x) | -Statement(x) | -hasOutput(y,x) | -Argument(z).  [resolve(55,d,45,b)].
+96 -Argument(x) | Conclusion(f8(x)).  [clausify(7)].
+98 -Premise(x) | hasInput(f11(y,x),y).  [clausify(9)].
+99 -Premise(x) | Argument(f12(x)).  [clausify(10)].
+100 -Premise(x) | Argument(f14(x)).  [clausify(11)].
+101 -Premise(x) | hasArgumentContext(x,f14(x)).  [clausify(11)].
+104 -Conclusion(x) | hasOutput(y,x).  [clausify(12)].
+105 -Conclusion(x) | Argument(f16(x)).  [clausify(13)].
+109 -Subconclusion(x) | Premise(y).  [clausify(16)].
+110 -Subconclusion(x) | hasOutput(f22(y,x),y).  [clausify(16)].
+120 -hasArgumentContext(x,y) | -hasArgumentContext(y,x).  [clausify(24)].
+123 Premise(b).  [assumption].
+128 Subconclusion(x) | -Premise(y) | -hasOutput(f11(z,u),y) | y != w | -Premise(u).  [resolve(35,c,27,b)].
+138 Premise(x) | -hasInput(f11(y,z),u) | -Premise(z) | -Conclusion(x).  [resolve(64,b,58,b)].
+144 -Conclusion(x) | -hasOutput(f15(y,x),z) | z = f4(f15(y,x)) | -Premise(z).  [resolve(69,b,57,b)].
+145 -Conclusion(x) | -hasOutput(f15(y,x),z) | f4(f15(y,x)) = z | -Premise(z).  [copy(144),flip(c)].
+191 Conclusion(x) | -hasOutput(y,x) | -Argument(z) | -Premise(x).  [resolve(73,b,57,b)].
+224 Argument(f14(b)).  [hyper(100,a,123,a)].
+226 hasInput(f11(x,b),x).  [hyper(98,a,123,a)].
+236 Conclusion(f8(f14(b))).  [hyper(96,a,224,a)].
+250 hasOutput(x,f8(f14(b))).  [hyper(104,a,236,a)].
+265 Premise(f8(f14(b))).  [hyper(138,b,226,a,c,123,a,d,236,a)].
+322 Subconclusion(x).  [hyper(128,b,265,a,c,250,a,d,xx,e,265,a)].
+341 hasOutput(f22(x,y),x).  [back_unit_del(110),unit_del(a,322)].
+342 Premise(x).  [back_unit_del(109),unit_del(a,322)].
+351 Conclusion(x) | -hasOutput(y,x) | -Argument(z).  [back_unit_del(191),unit_del(d,342)].
+360 -Conclusion(x) | -hasOutput(f15(y,x),z) | f4(f15(y,x)) = z.  [back_unit_del(145),unit_del(d,342)].
+364 hasArgumentContext(x,f14(x)).  [back_unit_del(101),unit_del(a,342)].
+366 Argument(f12(x)).  [back_unit_del(99),unit_del(a,342)].
+388 Conclusion(f8(f12(x))).  [hyper(96,a,366,a)].
+391 -hasArgumentContext(f14(x),x).  [ur(120,b,364,a)].
+404 Argument(f16(f8(f12(x)))).  [hyper(105,a,388,a)].
+503 Conclusion(x).  [hyper(351,b,341,a,c,404,a)].
+504 -hasOutput(f15(x,y),z) | f4(f15(x,y)) = z.  [back_unit_del(360),unit_del(a,503)].
+513 hasOutput(x,y).  [back_unit_del(104),unit_del(a,503)].
+516 f4(f15(x,y)) = z.  [back_unit_del(504),unit_del(a,513)].
+532 hasArgumentContext(x,f4(f15(y,z))).  [para(516(a,2),364(a,2))].
+533 $F.  [resolve(532,a,391,a)].
+
+============================== end of proof ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 2 at 0.06 (+ 0.01) seconds.
+% Length of proof is 61.
+% Level of proof is 14.
+% Maximum clause weight is 15.
+% Given clauses 168.
+
+3 (all x (ActOfConcluding(x) -> (exists y (LanguageAct(x) & Statement(y) & hasOutput(x,y) & (all z (Statement(z) & hasOutput(x,z) -> z = y)))))) # label(non_clause).  [assumption].
+6 (all x (ActOfArgumentCreation(x) -> (exists y (ActOfConcluding(y) & hasProcessPart(z,y))))) # label(non_clause).  [assumption].
+7 (all x (Argument(x) -> (exists y exists t (Conclusion(y) & hasContinuantPartAt(x,y,t))))) # label(non_clause).  [assumption].
+8 (all x (Argument(x) -> (exists y (ActOfArgumentCreation(y) & hasOutput(y,x))))) # label(non_clause).  [assumption].
+9 (all x (Premise(x) <-> Statement(x) & (exists y (ActOfInferring(y) & hasInput(y,z))))) # label(non_clause).  [assumption].
+10 (all x (Premise(x) -> (exists y exists t (Argument(y) & hasContinuantPartAt(y,x,t))))) # label(non_clause).  [assumption].
+11 (all x (Premise(x) -> (exists y (Argument(y) & hasArgumentContext(x,y) & (all z (Argument(z) & hasArgumentContext(z,x) -> z = y)))))) # label(non_clause).  [assumption].
+12 (all x (Conclusion(x) <-> Statement(x) & (exists y (ActOfConcluding(y) & hasOutput(z,x))))) # label(non_clause).  [assumption].
+13 (all x (Conclusion(x) -> (exists y exists t (Argument(y) & hasContinuantPartAt(y,x,t))))) # label(non_clause).  [assumption].
+16 (all x (Subconclusion(x) <-> (exists x exists y (Premise(z) & ActOfInferring(y) & hasOutput(y,z) & x = z)))) # label(non_clause).  [assumption].
+26 -(exists x hasArgumentContext(x,x)) # label(non_clause).  [assumption].
+27 -Premise(x) | ActOfInferring(f11(y,x)).  [clausify(9)].
+33 Premise(x) | -Statement(x) | -ActOfInferring(y) | -hasInput(y,z).  [clausify(9)].
+35 Subconclusion(x) | -Premise(y) | -ActOfInferring(z) | -hasOutput(z,y) | y != u.  [clausify(16)].
+36 -ActOfArgumentCreation(x) | ActOfConcluding(f7(y,x)).  [clausify(6)].
+40 -ActOfConcluding(x) | -Statement(y) | -hasOutput(x,y) | y = f4(x).  [clausify(3)].
+43 -Conclusion(x) | ActOfConcluding(f15(y,x)).  [clausify(12)].
+44 Conclusion(x) | -Statement(x) | -ActOfConcluding(y) | -hasOutput(z,x).  [clausify(12)].
+45 -Argument(x) | ActOfArgumentCreation(f10(x)).  [clausify(8)].
+55 Conclusion(x) | -Statement(x) | -hasOutput(y,x) | -ActOfArgumentCreation(z).  [resolve(44,c,36,b)].
+57 -Premise(x) | Statement(x).  [clausify(9)].
+58 -Conclusion(x) | Statement(x).  [clausify(12)].
+64 Premise(x) | -Statement(x) | -hasInput(f11(y,z),u) | -Premise(z).  [resolve(33,c,27,b)].
+69 -Conclusion(x) | -Statement(y) | -hasOutput(f15(z,x),y) | y = f4(f15(z,x)).  [resolve(43,b,40,a)].
+73 Conclusion(x) | -Statement(x) | -hasOutput(y,x) | -Argument(z).  [resolve(55,d,45,b)].
+96 -Argument(x) | Conclusion(f8(x)).  [clausify(7)].
+98 -Premise(x) | hasInput(f11(y,x),y).  [clausify(9)].
+99 -Premise(x) | Argument(f12(x)).  [clausify(10)].
+100 -Premise(x) | Argument(f14(x)).  [clausify(11)].
+101 -Premise(x) | hasArgumentContext(x,f14(x)).  [clausify(11)].
+104 -Conclusion(x) | hasOutput(y,x).  [clausify(12)].
+105 -Conclusion(x) | Argument(f16(x)).  [clausify(13)].
+109 -Subconclusion(x) | Premise(y).  [clausify(16)].
+110 -Subconclusion(x) | hasOutput(f22(y,x),y).  [clausify(16)].
+122 -hasArgumentContext(x,x).  [clausify(26)].
+123 Premise(b).  [assumption].
+128 Subconclusion(x) | -Premise(y) | -hasOutput(f11(z,u),y) | y != w | -Premise(u).  [resolve(35,c,27,b)].
+138 Premise(x) | -hasInput(f11(y,z),u) | -Premise(z) | -Conclusion(x).  [resolve(64,b,58,b)].
+144 -Conclusion(x) | -hasOutput(f15(y,x),z) | z = f4(f15(y,x)) | -Premise(z).  [resolve(69,b,57,b)].
+145 -Conclusion(x) | -hasOutput(f15(y,x),z) | f4(f15(y,x)) = z | -Premise(z).  [copy(144),flip(c)].
+191 Conclusion(x) | -hasOutput(y,x) | -Argument(z) | -Premise(x).  [resolve(73,b,57,b)].
+224 Argument(f14(b)).  [hyper(100,a,123,a)].
+226 hasInput(f11(x,b),x).  [hyper(98,a,123,a)].
+236 Conclusion(f8(f14(b))).  [hyper(96,a,224,a)].
+250 hasOutput(x,f8(f14(b))).  [hyper(104,a,236,a)].
+265 Premise(f8(f14(b))).  [hyper(138,b,226,a,c,123,a,d,236,a)].
+322 Subconclusion(x).  [hyper(128,b,265,a,c,250,a,d,xx,e,265,a)].
+341 hasOutput(f22(x,y),x).  [back_unit_del(110),unit_del(a,322)].
+342 Premise(x).  [back_unit_del(109),unit_del(a,322)].
+351 Conclusion(x) | -hasOutput(y,x) | -Argument(z).  [back_unit_del(191),unit_del(d,342)].
+360 -Conclusion(x) | -hasOutput(f15(y,x),z) | f4(f15(y,x)) = z.  [back_unit_del(145),unit_del(d,342)].
+364 hasArgumentContext(x,f14(x)).  [back_unit_del(101),unit_del(a,342)].
+366 Argument(f12(x)).  [back_unit_del(99),unit_del(a,342)].
+388 Conclusion(f8(f12(x))).  [hyper(96,a,366,a)].
+404 Argument(f16(f8(f12(x)))).  [hyper(105,a,388,a)].
+503 Conclusion(x).  [hyper(351,b,341,a,c,404,a)].
+504 -hasOutput(f15(x,y),z) | f4(f15(x,y)) = z.  [back_unit_del(360),unit_del(a,503)].
+513 hasOutput(x,y).  [back_unit_del(104),unit_del(a,503)].
+516 f4(f15(x,y)) = z.  [back_unit_del(504),unit_del(a,513)].
+532 hasArgumentContext(x,f4(f15(y,z))).  [para(516(a,2),364(a,2))].
+534 $F.  [resolve(532,a,122,a)].
+
+============================== end of proof ==========================

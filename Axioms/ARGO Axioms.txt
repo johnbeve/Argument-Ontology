@@ -30,7 +30,7 @@ all x all t((Argument(x) & existsAt(x,t)) -> exists y(Conclusion(y) & existsAt(y
 all x all t((Argument(x) & existsAt(x,t)) -> exists y (ActOfArgumentCreation(y) & hasOutput(y,x))). 
 %ARGO1.8
 
-all x (Premise(x) <-> (Statement(x) & exists z(ActOfInferring(z) & hasInput(z,y)))).
+all x (Premise(x) <-> (Statement(x) & exists z(ActOfInferring(z) & hasInput(z,x)))).
 %ARGO1.9
 
 all x all t((Premise(x) & existsAt(x,t)) -> exists y (Argument(y) & existsAt(y,t) & hasContinuantPartAt(y,x,t))).

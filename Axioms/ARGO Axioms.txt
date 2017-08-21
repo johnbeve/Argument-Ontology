@@ -36,7 +36,7 @@ all x (Premise(x) <-> (Statement(x) & exists z(ActOfInferring(z) & hasInput(z,y)
 all x (Premise(x) -> exists y exists t(Argument(y) & hasContinuantPartAt(y,x,t))).
 %ARGO1.10 (is this supposed to be with OWL or FOL?; removed restriction, throwing parsing (?) errors for some reason; ensure functional)
 
-all x (Premise(x) -> exists y(Argument(y) & hasArgumentContext(x,y) & all z((Argument(z) & hasArgumentContext(z,x))->z=y))).
+all x (Premise(x) -> exists y(Argument(y) & hasArgumentContext(x,y) & all z((Argument(z) & hasArgumentContext(x,z))->z=y))).
 %ARGO1.11
 
 all x (Conclusion(x) <-> (Statement(x) & exists z(ActOfConcluding(z) & hasOutput(y,x)))).
@@ -76,5 +76,5 @@ all x all y ((hasArgumentContext(x,y) & hasArgumentContext(x,z))->y=z).
 %     A-BOX                      *
 %*********************************
 %Statement(a). 
-Premise(b). 
+%Premise(b). 
 %Conclusion(c). 

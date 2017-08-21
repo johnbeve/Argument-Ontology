@@ -1,0 +1,217 @@
+% number = 1
+% seconds = 0
+
+% Interpretation of size 2
+
+a = 0.
+
+b = 0.
+
+c = 1.
+
+d = 0.
+
+e = 0.
+
+f = 0.
+
+g = 0.
+
+h = 0.
+
+i = 1.
+
+f1(0) = 1.
+f1(1) = 0.
+
+f2(0) = 0.
+f2(1) = 0.
+
+f3(0) = 1.
+f3(1) = 0.
+
+f4(0) = 1.
+f4(1) = 0.
+
+f5(0) = 1.
+f5(1) = 0.
+
+f6(0) = 1.
+f6(1) = 0.
+
+f10(0) = 0.
+f10(1) = 0.
+
+f16(0) = 0.
+f16(1) = 1.
+
+f7(0,0) = 0.
+f7(0,1) = 0.
+f7(1,0) = 0.
+f7(1,1) = 0.
+
+f8(0,0) = 0.
+f8(0,1) = 0.
+f8(1,0) = 0.
+f8(1,1) = 0.
+
+f9(0,0) = 0.
+f9(0,1) = 0.
+f9(1,0) = 0.
+f9(1,1) = 0.
+
+f11(0,0) = 0.
+f11(0,1) = 0.
+f11(1,0) = 0.
+f11(1,1) = 0.
+
+f12(0,0) = 0.
+f12(0,1) = 0.
+f12(1,0) = 0.
+f12(1,1) = 0.
+
+f13(0,0) = 0.
+f13(0,1) = 0.
+f13(1,0) = 0.
+f13(1,1) = 0.
+
+f14(0,0) = 0.
+f14(0,1) = 0.
+f14(1,0) = 0.
+f14(1,1) = 0.
+
+f15(0,0) = 0.
+f15(0,1) = 0.
+f15(1,0) = 0.
+f15(1,1) = 0.
+
+f17(0,0) = 0.
+f17(0,1) = 0.
+f17(1,0) = 0.
+f17(1,1) = 0.
+
+f18(0,0) = 0.
+f18(0,1) = 0.
+f18(1,0) = 0.
+f18(1,1) = 0.
+
+f19(0,0) = 0.
+f19(0,1) = 0.
+f19(1,0) = 0.
+f19(1,1) = 0.
+
+  ActOfArguing(0).
+- ActOfArguing(1).
+
+  ActOfArgumentCreation(0).
+- ActOfArgumentCreation(1).
+
+  ActOfConcluding(0).
+- ActOfConcluding(1).
+
+  ActOfInferring(0).
+- ActOfInferring(1).
+
+- ActOfSupposing(0).
+  ActOfSupposing(1).
+
+  Argument(0).
+  Argument(1).
+
+- Author(0).
+- Author(1).
+
+- Conclusion(0).
+  Conclusion(1).
+
+  LanguageAct(0).
+- LanguageAct(1).
+
+  Premise(0).
+- Premise(1).
+
+  Statement(0).
+  Statement(1).
+
+- Subconclusion(0).
+- Subconclusion(1).
+
+- Supposition(0).
+  Supposition(1).
+
+- TemporalRegion(0).
+- TemporalRegion(1).
+
+- existsAt(0,0).
+- existsAt(0,1).
+- existsAt(1,0).
+- existsAt(1,1).
+
+  hasInput(0,0).
+- hasInput(0,1).
+- hasInput(1,0).
+- hasInput(1,1).
+
+- hasOutput(0,0).
+  hasOutput(0,1).
+- hasOutput(1,0).
+  hasOutput(1,1).
+
+  hasProcessPart(0,0).
+- hasProcessPart(0,1).
+  hasProcessPart(1,0).
+- hasProcessPart(1,1).
+
+- defendedBy(0,0,0).
+- defendedBy(0,0,1).
+- defendedBy(0,1,0).
+- defendedBy(0,1,1).
+- defendedBy(1,0,0).
+- defendedBy(1,0,1).
+- defendedBy(1,1,0).
+- defendedBy(1,1,1).
+
+- defends(0,0,0).
+- defends(0,0,1).
+- defends(0,1,0).
+- defends(0,1,1).
+- defends(1,0,0).
+- defends(1,0,1).
+- defends(1,1,0).
+- defends(1,1,1).
+
+- hasArgumentContext(0,0,0).
+- hasArgumentContext(0,0,1).
+- hasArgumentContext(0,1,0).
+- hasArgumentContext(0,1,1).
+- hasArgumentContext(1,0,0).
+- hasArgumentContext(1,0,1).
+- hasArgumentContext(1,1,0).
+- hasArgumentContext(1,1,1).
+
+- hasArgumentContextAt(0,0,0).
+- hasArgumentContextAt(0,0,1).
+- hasArgumentContextAt(0,1,0).
+- hasArgumentContextAt(0,1,1).
+- hasArgumentContextAt(1,0,0).
+- hasArgumentContextAt(1,0,1).
+- hasArgumentContextAt(1,1,0).
+- hasArgumentContextAt(1,1,1).
+
+- hasContinuantPartAt(0,0,0).
+- hasContinuantPartAt(0,0,1).
+- hasContinuantPartAt(0,1,0).
+- hasContinuantPartAt(0,1,1).
+- hasContinuantPartAt(1,0,0).
+- hasContinuantPartAt(1,0,1).
+- hasContinuantPartAt(1,1,0).
+- hasContinuantPartAt(1,1,1).
+
+- isArgumentContextOf(0,0,0).
+- isArgumentContextOf(0,0,1).
+- isArgumentContextOf(0,1,0).
+- isArgumentContextOf(0,1,1).
+- isArgumentContextOf(1,0,0).
+- isArgumentContextOf(1,0,1).
+- isArgumentContextOf(1,1,0).
+- isArgumentContextOf(1,1,1).

@@ -24,28 +24,28 @@ all x (ActOfArgumentCreation(x) -> exists y (Argument(y) & hasOutput(x,y))).
 all x (ActOfArgumentCreation(x) -> exists y (ActOfConcluding(y) & hasProcessPart(w,y))).
 %ARGO1.6
 
-all x (Argument(x) -> exists y exists t(Conclusion(y) & hasContinuantPartAt(x,y,t))).
+all x all t((Argument(x) & existsAt(x,t)) -> exists y(Conclusion(y) & existsAt(y,t) & hasContinuantPartAt(x,y,t))).
 %ARGO1.7 (is this supposed to be with OWL or FOL?; removed restriction, throwing parsing (?) errors for some reason; ensure functional)
 
-all x (Argument(x) -> exists y (ActOfArgumentCreation(y) & hasOutput(y,x))). 
+all x all t((Argument(x) & existsAt(x,t)) -> exists y (ActOfArgumentCreation(y) & hasOutput(y,x))). 
 %ARGO1.8
 
 all x (Premise(x) <-> (Statement(x) & exists z(ActOfInferring(z) & hasInput(z,y)))).
 %ARGO1.9
 
-all x (Premise(x) -> exists y exists t(Argument(y) & hasContinuantPartAt(y,x,t))).
+all x all t((Premise(x) & existsAt(x,t)) -> exists y (Argument(y) & existsAt(y,t) & hasContinuantPartAt(y,x,t))).
 %ARGO1.10 (is this supposed to be with OWL or FOL?; removed restriction, throwing parsing (?) errors for some reason; ensure functional)
 
-all x (Premise(x) -> exists y(Argument(y) & hasArgumentContext(x,y) & all z((Argument(z) & hasArgumentContext(x,z))->z=y))).
+all x all t((Premise(x) & existsAt(x,t)) -> exists y(Argument(y) & hasArgumentContextAt(x,y,t) & all z all u((Argument(z) & hasArgumentContext(x,z,u))->z=y))).
 %ARGO1.11
 
 all x (Conclusion(x) <-> (Statement(x) & exists z(ActOfConcluding(z) & hasOutput(y,x)))).
 %ARGO1.12
 
-all x (Conclusion(x) -> exists y exists t(Argument(y) & hasContinuantPartAt(y,x,t))).
+all x all t((Conclusion(x) & existsAt(x,t)) -> exists y(Argument(y) & existsAt(y,t) & hasContinuantPartAt(y,x,t))).
 %ARGO1.13(is this supposed to be with OWL or FOL?; removed restriction, throwing parsing (?) errors for some reason; ensure functional)
 
-all x (Conclusion(x) -> exists y(Argument(y) & hasArgumentContext(x,y) & exists z((Argument(z) & hasArgumentContext(z,x))-> z=y))).
+all x all t((Conclusion(x) & existsAt(x,t)) -> exists y(Argument(y) & hasArgumentContext(x,y,t) & all z all u((Argument(z) & hasArgumentContext(z,x,u))-> z=y))).
 %ARGO1.14 (maybe need to relativize to times if FOL)
 
 all x (Supposition(x) <-> (Statement(x) & exists y(ActOfSupposing(y) & hasOutput(y,x)))).
@@ -54,23 +54,23 @@ all x (Supposition(x) <-> (Statement(x) & exists y(ActOfSupposing(y) & hasOutput
 all x (Subconclusion(x) <-> exists x exists z(Premise(y) & ActOfInferring(z) & hasOutput(z,y) & (x=y))).
 %ARGO1.16 
 
-all x (Subconclusion(x) -> exists y (Argument(y) & hasArgumentContext(x,y) & all z((Argument(z) & hasArgumentContext(z,x))->z=y))). 
+all x all t((Subconclusion(x) & existsAt(x,t)) -> exists y (Argument(y) & existsAt(y,t) & hasArgumentContext(x,y,t) & all z all u((Argument(z) & hasArgumentContext(x,z,u))->z=y))). 
 %ARGO1.17
 
 %*********************************
 %     RELATIONS                  *
 %*********************************
 
-all x all y (defendedBy(x,y) -> (Statement(x) & Author(y))).
-all x all y (defendedBy(x,y) <-> defends(y,x)).
-all x all y (defendedBy(x,y) -> -defendedBy(y,x)).
--(exists x(defendedBy(x,x))).
+all x all y all t(defendedBy(x,y,t) -> (Statement(x) & Author(y) & TemporalRegion(t))).
+all x all y all t(defendedBy(x,y,t) <-> defends(y,x,t)).
+all x all y all t(defendedBy(x,y,t) -> -defendedBy(y,x,t)).
+-(exists x exists t(defendedBy(x,x,t))).
 
-all x all y (hasArgumentContext(x,y) -> (Statement(x) & Argument(y))).
-all x all y (hasArgumentContext(x,y) <-> isArgumentContextOf(y,x)).
-all x all y (hasArgumentContext(x,y) -> -hasArgumentContext(y,x)).
-all x all y ((hasArgumentContext(x,y) & hasArgumentContext(x,z))->y=z).
--(exists x(hasArgumentContext(x,x))). 
+all x all y all t(hasArgumentContext(x,y,t) -> (Statement(x) & Argument(y) & TemporalRegion(t))).
+all x all y all t(hasArgumentContext(x,y,t) <-> isArgumentContextOf(y,x,t)).
+all x all y all t(hasArgumentContext(x,y,t) -> -hasArgumentContext(y,x,t)).
+all x all y all t((hasArgumentContext(x,y,t) & hasArgumentContext(x,z,t))->y=z).
+-(exists x exists t(hasArgumentContext(x,x,t))). 
 
 %*********************************
 %     A-BOX                      *
@@ -78,3 +78,11 @@ all x all y ((hasArgumentContext(x,y) & hasArgumentContext(x,z))->y=z).
 %Statement(a). 
 %Premise(b). 
 %Conclusion(c). 
+%Argument(d). 
+%ActOfArguing(e). 
+%ActOfInferring(f).
+%ActOfConcluding(g).
+%ActOfArgumentCreation(h).
+%Supposition(i).
+%Subconclusion(j).
+

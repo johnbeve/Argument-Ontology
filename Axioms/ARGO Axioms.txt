@@ -18,10 +18,10 @@ all x (ActOfConcluding(x) -> exists y(LanguageAct(x) & Statement(y) & hasOutput(
 all x (ActOfConcluding(x) -> exists y(Conclusion(y) & hasOutput(x,y))). 
 %ARGO1.4
 
-all x (ActOfArgumentCreation(x) -> exists y (Argument(y) & hasOutput(x,y))).
+all x (ActOfArgumentCreation(x) -> exists y (Argument(y) & hasOutput(x,y) & all z ((actOfInferring(z) & hasProcessPart(x,z))-> exists w (Statement(w) & hasArgumentContext(w,y) & (hasInput(z,w) | hasOutput(z,w)))))).
 %ARGO1.5
 
-all x (ActOfArgumentCreation(x) -> exists y (ActOfConcluding(y) & hasProcessPart(w,y))).
+all x (ActOfArgumentCreation(x) -> exists y (ActOfConcluding(y) & hasProcessPart(x,y))).
 %ARGO1.6
 
 all x all t((Argument(x) & existsAt(x,t)) -> exists y(Conclusion(y) & existsAt(y,t) & hasContinuantPartAt(x,y,t))).

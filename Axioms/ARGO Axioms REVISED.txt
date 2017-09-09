@@ -190,6 +190,8 @@ all x all y all z all t((isCreatedBy(x,y,t) & isCreatedBy(x,z,t))-> y=z).
 
 all x all y all z all t ((Premise(x) & hasArgumentContextAt(x,y,t) & ActOfInferring(z) & inputOf(x,z,t))-> exists w(ActOfArgumentCreation(w) & occurrentPartOf(z,w) & isCreatedBy(y,w,t))). 
 
+all x all y all z ((ActOfInferring(x) & ActOfArgumentCreation(y) & ActOfArgumentCreation(z) & occurrentPartOf(x,y) & -occurrentPartOf(y,z))->-occurrentPartOf(x,z)). 
+
 %**********************************
 %      IN PROGESS                 * 
 %********************************** 

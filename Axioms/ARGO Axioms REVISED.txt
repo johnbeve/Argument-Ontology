@@ -36,7 +36,7 @@ all x all y all t(continuantOverlapAt(x,y,t) <-> (exists z(continuantPartOfAt(z,
  
 all x all y all t(properContinuantPartOfAt(x,y,t) <-> (continuantPartOfAt(x,y,t) & -(x=y))).
 
-all x all y all t(continuantPartOfAt(x,y,t) -> (Continuant(x) & Continuant(y) & TemporalRegion(t))).
+all x all y all t(continuantPartOfAt(x,y,t) -> (Continuant(x) & Continuant(y) & TemporalRegion(t))). 
 
 all x all t ((Continuant(x) & existsAt(x,t))-> continuantPartOfAt(x,x,t)).  
 

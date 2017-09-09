@@ -36,7 +36,7 @@ all x all y all t(continuantOverlapAt(x,y,t) <-> (exists z(continuantPartOfAt(z,
  
 all x all y all t(properContinuantPartOfAt(x,y,t) <-> (continuantPartOfAt(x,y,t) & -(x=y))).
 
-all x all y all t(continuantPartOfAt(x,y,t) -> (Continuant(x) & Continuant(y) & TemporalRegion(t))).  
+all x all y all t(continuantPartOfAt(x,y,t) -> (Continuant(x) & Continuant(y) & TemporalRegion(t))).
 
 all x all t ((Continuant(x) & existsAt(x,t))-> continuantPartOfAt(x,x,t)).  
 
@@ -178,25 +178,33 @@ all x all y all t(isCreatedBy(x,y,t) -> (Argument(x) & ActOfArgumentCreation(y) 
 % RELATION FORMAL PROPERTY AXIOMS *
 %********************************** 
 
-all x all y all t((hasArgumentContextAt(x,y,t) & Premise(x) & Argument(y) & TemporalRegion(t))-> all z all t1((Argument(z) & TemporalRegion(t1) & hasArgumentContextAt(x,z,t1)) -> y=z)). 
+all x all y all z all t((Premise(x) & hasArgumentContextAt(x,y,t) & hasArgumentContextAt(x,z,t))-> y=z).
 
-all x all y all t((hasArgumentContextAt(x,y,t) & Conclusion(x) & Argument(y) & TemporalRegion(t))-> all z all t1((Argument(z) & TemporalRegion(t1) & hasArgumentContextAt(x,z,t1)) -> y=z)).
+all x all y all z all t((Conclusion(x) & hasArgumentContextAt(x,y,t) & hasArgumentContextAt(x,z,t))-> y=z).
 
-all x all y all z all t all t1((Conclusion(x) & hasArgumentContextAt(x,y,t) & hasArgumentContextAt(x,z,t1)) -> y=z).
-
-all x all y all t((hasArgumentContextAt(x,y,t) & Supposition(x) & Argument(y) & TemporalRegion(t))-> all z all t1((Argument(z) & TemporalRegion(t1) & hasArgumentContextAt(x,z,t1)) -> y=z)). 
+all x all y all z all t((Supposition(x) & hasArgumentContextAt(x,y,t) & hasArgumentContextAt(x,z,t))-> y=z).
 
 all x all y all z all t((isCreatedBy(x,y,t) & isCreatedBy(z,y,t))-> x=z).
 
 all x all y all z all t((isCreatedBy(x,y,t) & isCreatedBy(x,z,t))-> y=z).
 
-all x all y all t((isCreatedBy(x,y,t) & ComplexArgument(x) & TemporalRegion(t))-> exists z exists w exists u exists v(-(x=w | x=z | w=z) & ((Argument(z) & ActOfArgumentCreation(u)) <-> isCreatedBy(z,u,t)) & ((Argument(w) & ActOfArgumentCreation(v)) <-> isCreatedBy(w,v,t)))). 
-
-all x all y all z all w all t((Premise(x) & Argument(y) & TemporalRegion(t) & hasArgumentContextAt(x,y,t) & ActOfArgumentCreation(z) & ActOfInferring(w) & inputOf(x,w,t) & occurrentPartOf(w,z))->isCreatedBy(y,z,t)).
+all x all y all z all t ((Premise(x) & hasArgumentContextAt(x,y,t) & ActOfInferring(z) & inputOf(x,z,t))-> exists w(ActOfArgumentCreation(w) & occurrentPartOf(z,w) & isCreatedBy(y,w,t))). 
 
 %**********************************
-%      WIP                        *
+%      IN PROGESS                 * 
 %********************************** 
 
-all x(Subconclusion(x) -> (exists y exists z exists p1 exists p2 exists p3 exists a1 exists a2 exists a3 exists t(ActOfInferring(y) & ActOfInferring(z) & inputOf(x,y,t) & inputOf(x,z,t) & ActOfArgumentCreation(p1) & ActOfArgumentCreation(p2) & occurrentPartOf(y,p1) & occurrentPartOf(z,p2) & Argument(a1) & Argument(a2) & isCreatedBy(a1,p1,t) & isCreatedBy(a2,p2,t) & hasArgumentContextAt(x,a1,t) & hasArgumentContextAt(x,a2,t) & ActOfArgumentCreation(p3) & Argument(a3) & isCreatedBy(a3,p3,t) &
+%all x all y all z all w all t ((Premise(x) & hasArgumentContextAt(x,y,t) & ActOfInferring(z) & inputOf(x,z,t) & ActOfArgumentCreation(w) & occurrentPartOf(z,w))-> isCreatedBy(y,w,t)).
+
+%all x(Subconclusion(x) -> (exists y exists z exists p1 exists p2 exists p3 exists a1 exists a2 exists a3 exists t(ActOfInferring(y) & ActOfInferring(z) & inputOf(x,y,t) & inputOf(x,z,t) & ActOfArgumentCreation(p1) & ActOfArgumentCreation(p2) & occurrentPartOf(y,p1) & occurrentPartOf(z,p2) & Argument(a1) & Argument(a2) & isCreatedBy(a1,p1,t) & isCreatedBy(a2,p2,t) & hasArgumentContextAt(x,a1,t) & hasArgumentContextAt(x,a2,t) & ActOfArgumentCreation(p3) & Argument(a3) & isCreatedBy(a3,p3,t) &
 occurrentPartOf(p1,p3) & occurrentPartOf(p2,p3) & continuantPartOfAt(a1,a3,t) & continuantPartOfAt(a2,a3,t) & hasArgumentContextAt(x,a3,t)))). 
+
+%**********************************
+%      Theorems/Models            *
+%********************************** 
+
+%all x all t(-hasArgumentContextAt(x,x,t)). 
+%IRREFLEXIVE (PROVED)
+
+%all x all y all t(hasArgumentContextAt(x,y,t) -> -hasArgumentContextAt(y,x,t)). 
+%ASYMMETRIC (PROVED)

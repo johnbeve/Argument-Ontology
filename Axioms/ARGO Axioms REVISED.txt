@@ -2,35 +2,25 @@
 %* BFO-FOL Axioms                *
 %*********************************
 
-all x (Continuant(x) -> Entity(x)).
+all x(Continuant(x) -> Entity(x)).
 
-all x (IndependentContinuant(x) -> Continuant(x)).
+all x(IndependentContinuant(x) -> Continuant(x)).
 
-all x (MaterialEntity(x) -> IndependentContinuant(x)).
+all x(GenericallyDependentContinuant(x) -> Continuant(x)).
 
-all x (GenericallyDependentContinuant(x) -> Continuant(x)).
+all x(Occurrent(x) -> Entity(x)).
 
-all x (SpecificallyDependentContinuant(x) -> Continuant(x)).
+all x(Process(x) -> Occurrent(x)).
 
-all x (Occurrent(x) -> Entity(x)).
+all x(TemporalRegion(x) -> Occurrent(x)).
 
-all x (Process(x) -> Occurrent(x)).
-
-all x (TemporalRegion(x) -> Occurrent(x)).
-
-all x (Entity(x) -> (Continuant(x) | Occurrent(x))).
+all x(Entity(x) -> (Continuant(x) | Occurrent(x))).
 
 -(exists x (Continuant(x) & Occurrent(x))).
 
-all x (IndependentContinuant(x) -> (-GenericallyDependentContinuant(x) & -SpecificallyDependentContinuant(x))).
+all x(IndependentContinuant(x) -> -GenericallyDependentContinuant(x)).
 
-all x (GenericallyDependentContinuant(x) -> (-IndependentContinuant(x) & -SpecificallyDependentContinuant(x))).
-
-all x (SpecificallyDependentContinuant(x) -> (-GenericallyDependentContinuant(x) & -IndependentContinuant(x))).
-
-all x (Process(x) -> -TemporalRegion(x)).
-
-all x (TemporalRegion(x) -> -Process(x)).
+all x(Process(x) -> -TemporalRegion(x)).
 
 all x all y all t(continuantOverlapAt(x,y,t) <-> (exists z(continuantPartOfAt(z,x,t) & continuantPartOfAt(z,y,t)))).
  
@@ -38,7 +28,7 @@ all x all y all t(properContinuantPartOfAt(x,y,t) <-> (continuantPartOfAt(x,y,t)
 
 all x all y all t(continuantPartOfAt(x,y,t) -> (Continuant(x) & Continuant(y) & TemporalRegion(t))).
 
-all x all t ((Continuant(x) & existsAt(x,t))-> continuantPartOfAt(x,x,t)).  
+all x all t((Continuant(x) & existsAt(x,t))-> continuantPartOfAt(x,x,t)).  
 
 all x all y all t((continuantPartOfAt(x,y,t) & continuantPartOfAt(y,x,t)) -> x=y).
 
@@ -56,27 +46,21 @@ all x all y(occurrentPartOf(x,y) -> (Occurrent(x) & Occurrent(y))).
 
 all x all t((TemporalRegion(t) & existsAt(x,t) & Occurrent(x))->occurrentPartOf(x,x)).
  
-all x all y ((occurrentPartOf(x,y) & occurrentPartOf(y,x)) -> x=y). 
+all x all y((occurrentPartOf(x,y) & occurrentPartOf(y,x)) -> x=y). 
 
-all x all y all z  ((occurrentPartOf(x,y) & occurrentPartOf(y,z))->occurrentPartOf(x,z)). 
+all x all y all z ((occurrentPartOf(x,y) & occurrentPartOf(y,z))->occurrentPartOf(x,z)). 
 
-all x all y (properOccurrentPartOf(x,y)-> (exists z(properOccurrentPartOf(z,y) & -(occurrentOverlap(z,x))))).
+all x all y(properOccurrentPartOf(x,y)-> (exists z(properOccurrentPartOf(z,y) & -(occurrentOverlap(z,x))))).
 
-all x all y (occurrentOverlap(x,y) -> (exists z (all w(occurrentPartOf(w,z) <-> (occurrentPartOf(w,x) & occurrentPartOf(w,y)))))).
+all x all y(occurrentOverlap(x,y) -> (exists z (all w(occurrentPartOf(w,z) <-> (occurrentPartOf(w,x) & occurrentPartOf(w,y)))))).
 
-all x all t (existsAt(x,t) -> (Entity(x) & TemporalRegion(t) & (Entity(x) <-> TemporalRegion(t)))).
-
-all x all t (existsAt(x,t) -> TemporalRegion(t)). 
+all x all t(existsAt(x,t) -> (Entity(x) & TemporalRegion(t))).
 
 all x all y((exists t (TemporalRegion(t) & GenericallyDependentContinuant(x) & genericallyDependsOnAt(x,y,t)))-> all t_1 ((TemporalRegion(t_1) & existsAt(x,t_1))->exists z(genericallyDependsOnAt(x,z,t_1)))).
 
 all x (GenericallyDependentContinuant(x)<->(Continuant(x) & exists y exists t (IndependentContinuant(y) & TemporalRegion(t) & genericallyDependsOnAt(x,y,t)))).
 
-all x all y all t ((TemporalRegion(t) & genericallyDependsOnAt(x,y,t))-> exists z (concretizesAt(z,x,t) & specificallyDependsOnAt(z,y,t))).
-
-all x (Process(x)<->(Occurrent(x) & exists y (properOccurrentPartOf(y,x)))). 
-
-all x (Process(x) -> exists z exists t(TemporalRegion(t) & MaterialEntity(z) & specificallyDependsOnAt(x,z,t))).
+all x(Process(x)->(Occurrent(x) & exists y (properOccurrentPartOf(y,x)))). 
 
 %*************************************
 %     ARGO AXIOMS                    *
@@ -86,9 +70,9 @@ all x (Process(x) -> exists z exists t(TemporalRegion(t) & MaterialEntity(z) & s
 %    CLASS HIERARCHY AXIOMS      *
 %*********************************
 
-all x (InformationContentEntity(x) -> GenericallyDependentContinuant(x)). 
+all x(InformationContentEntity(x) -> GenericallyDependentContinuant(x)). 
 
-all x (CollectionOfStatements(x) -> InformationContentEntity(x)).
+all x(CollectionOfStatements(x) -> InformationContentEntity(x)).
 
 all x(Argument(x) -> CollectionOfStatements(x)).
 
@@ -106,9 +90,9 @@ all x(Supposition(x) -> (Statement(x) & -(Conclusion(x) | Premise(x) | Subconclu
 
 all x(Subconclusion(x) -> (Statement(x) & -(Conclusion(x) | Supposition(x) | Premise(x)))).
 
-all x (LanguageAct(x) -> Process(x)).
+all x(LanguageAct(x) -> Process(x)).
 
-all x (ActOfArguing(x) -> (LanguageAct(x) & -(ActOfArgumentCreation(x) | ActOfSupposing(x) | ActOfAffirming(x) | ActOfInferring(x)))).
+all x(ActOfArguing(x) -> (LanguageAct(x) & -(ActOfArgumentCreation(x) | ActOfSupposing(x) | ActOfAffirming(x) | ActOfInferring(x)))).
 
 all x(ActOfArgumentCreation(x) -> (LanguageAct(x) & -(ActOfArguing(x) | ActOfSupposing(x) | ActOfAffirming(x) | ActOfInferring(x)))).
 
@@ -138,7 +122,7 @@ ActOfSupposing(k).
 %  CLASS FORMAL PROPERTY AXIOMS  *
 %********************************* 
 
-all x(Argument(x) -> (exists y exists z exists t(TemporalRegion(t) & Premise(y) & Conclusion(z) & hasArgumentContextAt(y,x,t) & hasArgumentContextAt(z,x,t)))).
+all x(Argument(x) -> (exists y exists z exists t(TemporalRegion(t) & Statement(y) & Statement(z) & -(y=z) & hasArgumentContextAt(y,x,t) & hasArgumentContextAt(z,x,t)))).
 
 all x(ComplexArgument(x) <-> (exists y exists z exists t(TemporalRegion(t) & -(z=y) & Argument(y) & Argument(z) & continuantPartOfAt(y,x,t) & continuantPartOfAt(z,x,t)))).
 
@@ -153,6 +137,10 @@ all x(Conclusion(x)-> exists y exists t(TemporalRegion(t) & ActOfInferring(y) & 
 all x(Supposition(x)-> exists y exists t(TemporalRegion(t) & ActOfSupposing(y) & outputOf(x,y,t))).
 
 all x(Supposition(x)-> exists y exists t(TemporalRegion(t) & ActOfInferring(y) & inputOf(x,y,t))).
+
+all x(Subconclusion(x) -> (exists y exists z exists t exists w(hasArgumentContextAt(x,y,t) & hasArgumentContextAt(x,z,t) & -(y=z) & Argument(w) & continuantPartOfAt(y,w,t) & continuantPartOfAt(z,w,t)))).
+
+all x(Subconclusion(x) -> (exists y exists z exists t exists w(ActOfInferring(y) & ActOfInferring(z) & -(y=z) & inputOf(x,y,t) & inputOf(x,z,t) & ActOfArgumentCreation(w) & occurrentPartOf(y,w) & occurrentPartOf(z,w)))). 
 
 all x(ActOfArgumentCreation(x) -> exists y exists t(TemporalRegion(t) & Argument(y) & isCreatedBy(y,x,t))). 
 
@@ -188,21 +176,14 @@ all x all y all z all t((isCreatedBy(x,y,t) & isCreatedBy(z,y,t))-> x=z).
 
 all x all y all z all t((isCreatedBy(x,y,t) & isCreatedBy(x,z,t))-> y=z).
 
-all x all y all z all t ((Premise(x) & hasArgumentContextAt(x,y,t) & ActOfInferring(z) & inputOf(x,z,t))-> exists w(ActOfArgumentCreation(w) & occurrentPartOf(z,w) & isCreatedBy(y,w,t))). 
+all x all y all t ((ComplexArgument(x) & ActOfArgumentCreation(y) & TemporalRegion(t) & isCreatedBy(x,y,t))->(exists z (ActOfArgumentCreation(z) & -(z=y) & occurrentPartOf(z,y)))). 
 
-all x all y all z ((ActOfInferring(x) & ActOfArgumentCreation(y) & ActOfArgumentCreation(z) & occurrentPartOf(x,y) & -occurrentPartOf(y,z))->-occurrentPartOf(x,z)). 
+all x all y all z all t((ActOfInferring(x) & ActOfArgumentCreation(y) & occurrentPartOf(x,y) & Statement(z) & (inputOf(z,x,t) | outputOf(z,x,t)))->exists w(hasArgumentContextAt(z,w,t) & isCreatedBy(w,y,t))).
 
-%**********************************
-%      IN PROGESS                 * 
-%********************************** 
-
-%all x all y all z all w all t ((Premise(x) & hasArgumentContextAt(x,y,t) & ActOfInferring(z) & inputOf(x,z,t) & ActOfArgumentCreation(w) & occurrentPartOf(z,w))-> isCreatedBy(y,w,t)).
-
-%all x(Subconclusion(x) -> (exists y exists z exists p1 exists p2 exists p3 exists a1 exists a2 exists a3 exists t(ActOfInferring(y) & ActOfInferring(z) & inputOf(x,y,t) & inputOf(x,z,t) & ActOfArgumentCreation(p1) & ActOfArgumentCreation(p2) & occurrentPartOf(y,p1) & occurrentPartOf(z,p2) & Argument(a1) & Argument(a2) & isCreatedBy(a1,p1,t) & isCreatedBy(a2,p2,t) & hasArgumentContextAt(x,a1,t) & hasArgumentContextAt(x,a2,t) & ActOfArgumentCreation(p3) & Argument(a3) & isCreatedBy(a3,p3,t) &
-occurrentPartOf(p1,p3) & occurrentPartOf(p2,p3) & continuantPartOfAt(a1,a3,t) & continuantPartOfAt(a2,a3,t) & hasArgumentContextAt(x,a3,t)))). 
+all x all y all z all t((ActOfSupposing(x) & ActOfArgumentCreation(y) & occurrentPartOf(x,y) & Statement(z) & (inputOf(z,x,t) | outputOf(z,x,t)))->exists w(hasArgumentContextAt(z,w,t) & isCreatedBy(w,y,t))).
 
 %**********************************
-%      Theorems/Models            *
+%      THEOREMS/MODELS            *
 %********************************** 
 
 %all x all t(-hasArgumentContextAt(x,x,t)). 
@@ -210,3 +191,27 @@ occurrentPartOf(p1,p3) & occurrentPartOf(p2,p3) & continuantPartOfAt(a1,a3,t) & 
 
 %all x all y all t(hasArgumentContextAt(x,y,t) -> -hasArgumentContextAt(y,x,t)). 
 %ASYMMETRIC (PROVED)
+
+%all x all t(-isCreatedBy(x,x,t)). 
+%IRREFLEXIVE (PROVED)
+
+%all x all y all t(isCreatedBy(x,y,t) -> -isCreatedBy(y,x,t)). 
+%ASYMMETRIC (PROVED)
+
+%all x all y all z ((ActOfInferring(x) & ActOfArgumentCreation(y) & ActOfArgumentCreation(z) & occurrentPartOf(x,y) & occurrentPartOf(x,z))->y=z). 
+%COUNTERMODEL (PROVED) parthood is transitive, so we want x to be possibly part of y and z if y is part of z
+
+%all x all y all z ((ActOfInferring(x) & ActOfArgumentCreation(y) & ActOfArgumentCreation(z) & occurrentPartOf(x,y) & occurrentPartOf(y,z))->occurrentPartOf(x,z)). 
+%TRANSITIVITY (PROVED)
+
+%all x all y all z all t((Premise(x) & hasArgumentContextAt(x,y,t) & ActOfInferring(z) & inputOf(x,z,t))-> exists w(ActOfArgumentCreation(w) & occurrentPartOf(z,w) & isCreatedBy(y,w,t))). 
+%(PROVED)
+
+%all x all y all z all t((Conclusion(x) & hasArgumentContextAt(x,y,t) & ActOfInferring(z) & outputOf(x,z,t))-> exists w(ActOfArgumentCreation(w) & occurrentPartOf(z,w) & isCreatedBy(y,w,t))). 
+%(PROVED)
+
+%all x all y all z all t((Conclusion(x) & hasArgumentContextAt(x,y,t) & ActOfSupposing(z) & outputOf(x,z,t))-> exists w(ActOfArgumentCreation(w) & occurrentPartOf(z,w) & isCreatedBy(y,w,t))). 
+%(PROVED)
+
+%all x all y all z all t((Supposition(x) & hasArgumentContextAt(x,y,t) & ActOfSupposing(z) & inputOf(x,z,t))-> exists w(ActOfArgumentCreation(w) & occurrentPartOf(z,w) & isCreatedBy(y,w,t))). 
+%(PROVED)

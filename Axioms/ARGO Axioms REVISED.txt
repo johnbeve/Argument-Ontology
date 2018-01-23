@@ -2,43 +2,61 @@
 %* BFO-FOL Axioms                *
 %*********************************
 
-all x(Continuant(x) -> Entity(x)).
+all x (Continuant(x) -> Entity(x)).
 
-all x(IndependentContinuant(x) -> Continuant(x)).
+all x (IndependentContinuant(x) -> Continuant(x)).
 
-all x(GenericallyDependentContinuant(x) -> Continuant(x)).
+all x (MaterialEntity(x) -> IndependentContinuant(x)).
 
-all x(Occurrent(x) -> Entity(x)).
+all x (GenericallyDependentContinuant(x) -> Continuant(x)).
 
-all x(Process(x) -> Occurrent(x)).
+all x (SpecificallyDependentContinuant(x) -> Continuant(x)).
 
-all x(TemporalRegion(x) -> Occurrent(x)).
+all x (Occurrent(x) -> Entity(x)).
 
-all x(Entity(x) -> (Continuant(x) | Occurrent(x))).
+all x (Process(x) -> Occurrent(x)).
+
+all x (ProcessBoundary(x) -> Occurrent(x)).
+
+all x (TemporalRegion(x) -> Occurrent(x)).
+
+all x (ZeroDimensionalTemporalRegion(x) -> TemporalRegion(x)).
+
+all x (OneDimensionalTemporalRegion(x) -> TemporalRegion(x)).
+
+all x (SpatiotemporalRegion(x) -> Occurrent(x)).
+
+all x (Entity(x) -> (Continuant(x) | Occurrent(x))).
 
 -(exists x (Continuant(x) & Occurrent(x))).
 
-all x(IndependentContinuant(x) -> -GenericallyDependentContinuant(x)).
+all x (IndependentContinuant(x) -> (-GenericallyDependentContinuant(x) & -SpecificallyDependentContinuant(x))).
 
-all x(Process(x) -> -TemporalRegion(x)).
+all x (GenericallyDependentContinuant(x) -> (-IndependentContinuant(x) & -SpecificallyDependentContinuant(x))).
 
-all x all y all t(continuantOverlapAt(x,y,t) <-> (exists z(continuantPartOfAt(z,x,t) & continuantPartOfAt(z,y,t)))).
+all x (SpecificallyDependentContinuant(x) -> (-GenericallyDependentContinuant(x) & -IndependentContinuant(x))).
+
+all x (Process(x) -> (-ProcessBoundary(x) & -TemporalRegion(x) & -SpatiotemporalRegion(x))).
+
+all x (ProcessBoundary(x) -> (-Process(x) & -TemporalRegion(x) & -SpatiotemporalRegion(x))).
+
+all x (TemporalRegion(x) -> (-ProcessBoundary(x) & -Process(x) & -SpatiotemporalRegion(x))).
+
+all x (SpatiotemporalRegion(x) -> (-ProcessBoundary(x) & -TemporalRegion(x) & -Process(x))).
  
 all x all y all t(properContinuantPartOfAt(x,y,t) <-> (continuantPartOfAt(x,y,t) & -(x=y))).
 
 all x all y all t(continuantPartOfAt(x,y,t) -> (Continuant(x) & Continuant(y) & TemporalRegion(t))).
 
-all x all t((Continuant(x) & existsAt(x,t))-> continuantPartOfAt(x,x,t)).  
+all x all t ((Continuant(x) & existsAt(x,t))-> continuantPartOfAt(x,x,t)).  
 
 all x all y all t((continuantPartOfAt(x,y,t) & continuantPartOfAt(y,x,t)) -> x=y).
 
 all x all y all z all t ((continuantPartOfAt(x,y,t) & continuantPartOfAt(y,z,t))->continuantPartOfAt(x,z,t)).
 
-all x all y all t(properContinuantPartOfAt(x,y,t) -> (exists z (all w(continuantPartOfAt(w,z,t) <-> (continuantPartOfAt(w,x,t) & continuantPartOfAt(w,y,t)))))).
+all x all y all t(continuantOverlapAt(x,y,t) -> (exists z (all w(continuantPartOfAt(w,z,t) <-> (continuantPartOfAt(w,x,t) & continuantPartOfAt(w,y,t)))))).
 
 all x all y all t(continuantOverlapAt(x,y,t) -> (exists z (continuantOverlapAt(z,x,t) & continuantOverlapAt(z,y,t) & all w((continuantOverlapAt(w,x,t) & continuantOverlapAt(w,y,t))-> w=z)))). 
- 
-all x all y (occurrentOverlap(x,y) <-> (exists z(occurrentPartOf(z,x) & occurrentPartOf(z,y)))). 
  
 all x all y (properOccurrentPartOf(x,y) <-> (occurrentPartOf(x,y) & -(x=y))).
 
@@ -46,21 +64,25 @@ all x all y(occurrentPartOf(x,y) -> (Occurrent(x) & Occurrent(y))).
 
 all x all t((TemporalRegion(t) & existsAt(x,t) & Occurrent(x))->occurrentPartOf(x,x)).
  
-all x all y((occurrentPartOf(x,y) & occurrentPartOf(y,x)) -> x=y). 
+all x all y ((occurrentPartOf(x,y) & occurrentPartOf(y,x)) -> x=y).
 
-all x all y all z ((occurrentPartOf(x,y) & occurrentPartOf(y,z))->occurrentPartOf(x,z)). 
+all x all y all z  ((occurrentPartOf(x,y) & occurrentPartOf(y,z))->occurrentPartOf(x,z)). 
 
-all x all y(properOccurrentPartOf(x,y)-> (exists z(properOccurrentPartOf(z,y) & -(occurrentOverlap(z,x))))).
+all x all y (properOccurrentPartOf(x,y)-> (exists z(properOccurrentPartOf(z,y) & -(occurrentOverlap(z,x))))).
 
-all x all y(occurrentOverlap(x,y) -> (exists z (all w(occurrentPartOf(w,z) <-> (occurrentPartOf(w,x) & occurrentPartOf(w,y)))))).
+all x all y (occurrentOverlap(x,y) -> (exists z (all w(occurrentPartOf(w,z) <-> (occurrentPartOf(w,x) & occurrentPartOf(w,y)))))).
 
-all x all t(existsAt(x,t) -> (Entity(x) & TemporalRegion(t))).
+all x all t (existsAt(x,t) -> (Entity(x) & TemporalRegion(t) & (Entity(x) <-> TemporalRegion(t)))).
+
+all x all t (existsAt(x,t) -> TemporalRegion(t)). 
 
 all x all y((exists t (TemporalRegion(t) & GenericallyDependentContinuant(x) & genericallyDependsOnAt(x,y,t)))-> all t_1 ((TemporalRegion(t_1) & existsAt(x,t_1))->exists z(genericallyDependsOnAt(x,z,t_1)))).
 
 all x (GenericallyDependentContinuant(x)<->(Continuant(x) & exists y exists t (IndependentContinuant(y) & TemporalRegion(t) & genericallyDependsOnAt(x,y,t)))).
 
-all x(Process(x)->(Occurrent(x) & exists y (properOccurrentPartOf(y,x)))). 
+all x all y all t ((TemporalRegion(t) & genericallyDependsOnAt(x,y,t))-> exists z (concretizesAt(z,x,t) & specificallyDependsOnAt(z,y,t))).
+
+all x (Process(x) -> exists z exists t(TemporalRegion(t) & MaterialEntity(z) & specificallyDependsOnAt(x,z,t))).
 
 %*************************************
 %     ARGO AXIOMS                    *
@@ -70,148 +92,294 @@ all x(Process(x)->(Occurrent(x) & exists y (properOccurrentPartOf(y,x)))).
 %    CLASS HIERARCHY AXIOMS      *
 %*********************************
 
-all x(InformationContentEntity(x) -> GenericallyDependentContinuant(x)). 
+all x (InformationContentEntity(x) -> GenericallyDependentContinuant(x)). 
 
-all x(CollectionOfStatements(x) -> InformationContentEntity(x)).
+%Any instance of InformationContentEntity is an instance of GenericallyDependentContinuant
 
-all x(Argument(x) -> CollectionOfStatements(x)).
+all x (CollectionOfSentenceContents(x) -> InformationContentEntity(x)).
+
+%Any instance of CollectionOfSentenceContents is an instance of InformationContentEntity
+
+all x(Argument(x) -> CollectionOfSentenceContents(x)).
+
+%Any instance of Argument is an instance of CollectionOfSentenceContents
 
 all x(ComplexArgument(x) -> Argument(x)). 
 
-all x(Statement(x) -> InformationContentEntity(x)).
+%Any instance of ComplexArgument is an instance of Argument
 
--(exists x(Statement(x) & CollectionOfStatements(x))).
+all x(SentenceContent(x) -> InformationContentEntity(x)).
 
-all x(Premise(x) -> (Statement(x) & -(Conclusion(x) | Supposition(x) | Subconclusion(x)))).
+%Any instance of SentenceContent is an instance of InformationContentEntity
 
-all x(Conclusion(x) -> (Statement(x) & -(Premise(x) | Supposition(x) | Subconclusion(x)))).
+all x(Statement(x) -> SentenceContent(x)).
 
-all x(Supposition(x) -> (Statement(x) & -(Conclusion(x) | Premise(x) | Subconclusion(x)))).
+%Any instance of Statement is an instance of SentenceContent.
 
-all x(Subconclusion(x) -> (Statement(x) & -(Conclusion(x) | Supposition(x) | Premise(x)))).
+-(exists x(SentenceContent(x) & CollectionOfSentenceContents(x))).
 
-all x(LanguageAct(x) -> Process(x)).
+%SentenceContent and CollectionOfSentenceContents are disjoint
 
-all x(ActOfArguing(x) -> (LanguageAct(x) & -(ActOfArgumentCreation(x) | ActOfSupposing(x) | ActOfAffirming(x) | ActOfInferring(x)))).
+all x (LanguageAct(x) -> Process(x)).
 
-all x(ActOfArgumentCreation(x) -> (LanguageAct(x) & -(ActOfArguing(x) | ActOfSupposing(x) | ActOfAffirming(x) | ActOfInferring(x)))).
+%Any instance of LanguageAct is an instance of Process
 
-all x(ActOfSupposing(x) -> (LanguageAct(x) & -(ActOfArgumentCreation(x) | ActOfArguing(x) | ActOfAffirming(x) | ActOfInferring(x)))).
+all x (ActOfArguing(x) -> (LanguageAct(x) & -(ActOfArgumentCreation(x) | ActOfAccepting(x) | ActOfAffirming(x) | ActOfInferring(x)))).
 
-all x(ActOfInferring(x) -> (LanguageAct(x) & -(ActOfArgumentCreation(x) | ActOfSupposing(x) | ActOfAffirming(x) | ActOfArguing(x)))).
+%Any instance of ActOfArguing is an instance of LanguageAct, disjoint from ActOfArgumentCreation, ActOfAccepting, ActOfAffirming, ActOfInferring
 
-all x(ActOfAffirming(x) -> (LanguageAct(x) & -(ActOfArgumentCreation(x) | ActOfSupposing(x) | ActOfInferring(x) | ActOfArguing(x)))).
+all x(ActOfArgumentCreation(x) -> (LanguageAct(x) & -(ActOfArguing(x) | ActOfAccepting(x) | ActOfAffirming(x) | ActOfInferring(x)))).
 
-%*********************************
-%     A-BOX                      *
-%*********************************
+%Any instance of ActOfArgumentCreation is an instance of LanguageAct, disjoint from ActOfArguing, ActOfAccepting, ActOfAffirming, ActOfInferring
 
-Premise(a). 
-Conclusion(b). 
-Argument(c). 
-ActOfArguing(d). 
-ActOfInferring(e).
-ActOfArgumentCreation(f).
-Supposition(g).
-Subconclusion(h).
-ComplexArgument(i).
-ActOfAffirming(j).
-ActOfSupposing(k). 
+all x(ActOfAccepting(x) -> (LanguageAct(x) & -(ActOfArgumentCreation(x) | ActOfArguing(x) | ActOfAffirming(x) | ActOfInferring(x)))).
+
+%Any instance of ActOfAccepting is an instance of LanguageAct, disjoint from ActOfArguing, ActOfArgumentCreation, ActOfAffirming, ActOfInferring
+
+all x(ActOfAffirming(x) -> (LanguageAct(x) & -(ActOfArgumentCreation(x) | ActOfAccepting(x) | ActOfArguing(x) | ActOfInferring(x)))).
+
+%Any instance of ActOfAffirming is an instance of LanguageAct, disjoint from ActOfArguing, ActOfArgumentCreation, ActOfAccepting, ActOfInferring
+
+all x(ActOfInferring(x) -> (LanguageAct(x) & -(ActOfArgumentCreation(x) | ActOfAccepting(x) | ActOfArguing(x) | ActOfAffirming(x)))).
+
+%Any instance of ActOfInferring is an instance of LanguageAct, disjoint from ActOfArguing, ActOfArgumentCreation, ActOfAccepting, ActOfAffirming
 
 %*********************************
-%  CLASS FORMAL PROPERTY AXIOMS  *
-%********************************* 
+%    CLASS CONSTRAINT AXIOMS     *
+%*********************************  
 
-all x(Argument(x) -> (exists y exists z exists t(TemporalRegion(t) & Statement(y) & Statement(z) & -(y=z) & hasArgumentContextAt(y,x,t) & hasArgumentContextAt(z,x,t)))).
+all x(CollectionOfSentenceContents(x) -> exists y exists t(properContinuantPartOfAt(y,x,t) & SentenceContent(y))). 
 
-all x(ComplexArgument(x) <-> (exists y exists z exists t(TemporalRegion(t) & -(z=y) & Argument(y) & Argument(z) & continuantPartOfAt(y,x,t) & continuantPartOfAt(z,x,t)))).
+%Any collection of sentence contents has sentence content parts 
 
-all x(Premise(x)-> exists y exists t(TemporalRegion(t) & ActOfAffirming(y) & outputOf(x,y,t))).
+all x(Argument(x) -> exists y exists t(ActOfArgumentCreation(y) & TemporalRegion(t) & isCreatedBy(x,y,t))). 
 
-all x(Premise(x)-> exists y exists t(TemporalRegion(t) & ActOfInferring(y) & inputOf(x,y,t))).
+%Any argument entails the existence of an act of argument creation of which the argument is created at some time 
 
-all x(Conclusion(x)-> exists y exists t(TemporalRegion(t) & (ActOfSupposing(y) | ActOfAffirming(y)) & outputOf(x,y,t))).
+all x(Argument(x) -> exists y exists z exists t((premiseIn(y,x,t) | suppositionIn(y,x,t)) & conclusionIn(z,x,t) & all u(conclusionIn(u,x,t)-> z=u))).
 
-all x(Conclusion(x)-> exists y exists t(TemporalRegion(t) & ActOfInferring(y) & outputOf(x,y,t))).
+%Any argument has a premise or supposition and only one conclusion; leave open whether y=z 
 
-all x(Supposition(x)-> exists y exists t(TemporalRegion(t) & ActOfSupposing(y) & outputOf(x,y,t))).
+all x all y all t((Argument(x) & -ComplexArgument(x) &  properContinuantPartOfAt(y,x,t)) -> -(ComplexArgument(y) | Argument(y))). 
 
-all x(Supposition(x)-> exists y exists t(TemporalRegion(t) & ActOfInferring(y) & inputOf(x,y,t))).
+%The proper parts of any simple argument are neither complex arguments nor simple arguments 
 
-all x(Subconclusion(x) -> (exists y exists z exists t exists w(hasArgumentContextAt(x,y,t) & hasArgumentContextAt(x,z,t) & -(y=z) & Argument(w) & continuantPartOfAt(y,w,t) & continuantPartOfAt(z,w,t)))).
 
-all x(Subconclusion(x) -> (exists y exists z exists t exists w(ActOfInferring(y) & ActOfInferring(z) & -(y=z) & inputOf(x,y,t) & inputOf(x,z,t) & ActOfArgumentCreation(w) & occurrentPartOf(y,w) & occurrentPartOf(z,w)))). 
+all x(ActOfArgumentCreation(x) -> exists y exists t(Argument(y) & TemporalRegion(t) & isCreatedBy(y,x,t))).
 
-all x(ActOfArgumentCreation(x) -> exists y exists t(TemporalRegion(t) & Argument(y) & isCreatedBy(y,x,t))). 
+%Any act of argument creation creates an argument at a time  
 
-all x(ActOfSupposing(x) -> exists y exists z(ActOfInferring(y) & ActOfArgumentCreation(z) & occurrentPartOf(x,z) & occurrentPartOf(y,z))). 
+all x all y all t((ActOfArgumentCreation(x) & ComplexArgument(y) & isCreatedBy(y,x,t))-> exists u exists v(Argument(u) & ActOfArgumentCreation(v) & properContinuantPartOfAt(u,y,t) & properOccurrentPartOf(v,x) & isCreatedBy(u,v,t))).
 
-all x(ActOfInferring(x) -> exists y exists z exists t(TemporalRegion(t) & Statement(y) & Statement(z) & inputOf(y,x,t) & outputOf(z,x,t))). 
+%Act of argument creation which creates a complex argument entails proper part of complex are created by proper part of act of argument creation
 
-all x(ActOfInferring(x) -> exists y (ActOfArgumentCreation(y) & occurrentPartOf(x,y))). 
+all x all y all z all t((ActOfArgumentCreation(x) & isCreatedBy(y,x,t) & isCreatedBy(z,x,t)) -> z=y). 
+
+%Act of argument creation has unique argument output
+
+all x all y all z all t((ActOfArgumentCreation(x) & ActOfArgumentCreation(y) & ComplexArgument(z) & isCreatedBy(z,x,t) & properContinuantPartOfAt(w,z,t) & isCreatedBy(w,y,t)) -> properOccurrentPartOf(y,x)). 
+
+%An act of argument creation which creates a proper argument part of a complex argument is itself a proper part of the creation of the complex argument   
+
+
+all x(ComplexArgument(x) -> exists y exists t (subconclusionIn(y,x,t))). 
+
+%Any complex argument entails some subconclusion
+
+all x all y all t((ComplexArgument(y) & conclusionIn(x,y,t))-> exists z(Argument(z) & properContinuantPartOfAt(z,y,t) & conclusionIn(x,z,t))).
+
+%The conclusion of a complex argument must be the conclusion of one of the complex arguments's proper parts 
+
+all x(ComplexArgument(x) <-> exists y exists t(properContinuantPartOfAt(y,x,t) & Argument(y) & -ComplexArgument(y))). 
+
+%Complex arguments are ultimately composed of simple argument parts, and anything with proper argument part is a complex argument  
+
+all x all y all t((Argument(x) & ComplexArgument(y) & properContinuantPartOfAt(x,y,t))-> exists w exists u(ActOfArgumentCreation(w) & ActOfArgumentCreation(u) & isCreatedBy(x,w,t) & isCreatedBy(y,u,t) & properOccurrentPartOf(w,u) & -(isCreatedBy(x,u,t) | isCreatedBy(y,w,t)))).
+
+%A proper argument part of a complex argument entails distinct acts of argument creation for the complex argument and its part
+
+
+all x all y all t((ActOfAffirming(x) & TemporalRegion(t) & outputOf(y,x,t)) -> SentenceContent(y)).
+
+%Any act of affirming entails as output some sentence content
+
+all x all y all t((ActOfAccepting(x) & TemporalRegion(t) & outputOf(y,x,t)) -> SentenceContent(y)).
+
+%Any act of accepting entails as output some sentence content  
+
+all x all y all z all t((ActOfAffirming(x) & outputOf(y,x,t) & outputOf(z,x,t)) -> z=y). 
+
+%An act of affirming has unique output
+
+all x all y all z all t((ActOfAccepting(x) & outputOf(y,x,t) & outputOf(z,x,t)) -> z=y). 
+
+%An act of accepting has unique output 
+
+all x all y all z all t(((premiseIn(x,y,t) | suppositionIn(x,y,t)) & Argument(y) & ComplexArgument(z) & properContinuantPartOfAt(y,z,t))-> (premiseIn(x,z,t) | suppositionIn(x,z,t))).
+
+%If x is a premise or supposition in A, and A is a proper part of complex C, then x is a premise or supposition in C 
+
+
+all x all y all z all w all t((premiseIn(x,y,t) & ActOfAffirming(z) & outputOf(x,z,t) & ActOfArgumentCreation(w) & isCreatedBy(y,w,t)) -> occurrentPartOf(z,w)). 
+
+%Act of affirming premise in an argument is part of the act of argument creation 
+
+all x all y all z all w all t((conclusionIn(x,y,t) & (ActOfAccepting(z) | ActOfAffirming(z)) & outputOf(x,z,t) & ActOfArgumentCreation(w) & isCreatedBy(y,w,t)) -> occurrentPartOf(z,w)). 
+
+%Act of affirming or accepting conclusion in an argument is part of the act of argument creation
+
+all x all y all z all w all t((suppositionIn(x,y,t) & ActOfAccepting(z) & outputOf(x,z,t) & ActOfArgumentCreation(w) & isCreatedBy(y,w,t)) -> occurrentPartOf(z,w)). 
+
+%Act of accepting a supposition in an argument is a part of the act of argument creation 
+
+
+all x(ActOfInferring(x) -> exists y exists z exists t(TemporalRegion(t) & SentenceContent(y) & SentenceContent(z) & inputOf(y,x,t) & outputOf(z,x,t))). 
+
+%Act of inferring takes sentence contents as inputs and outputs
+
+all x(ActOfInferring(x) -> exists y (ActOfArgumentCreation(y) & properOccurrentPartOf(x,y))).
+
+%Act of inferring is occurrent part of some act of argument creation 
+
 
 %*********************************
-%  RELATION DOMAIN/RANGE AXIOMS  *
+%    RELATION HIERARCHY AXIOMS   *
+%*********************************
+
+%Inverses can be easily defined with the following schema: all x all y all t(R(x,y,t) <-> R'(y,x,t)). We leave them aside for simplicity. 
+
+all x all y all t(premiseIn(x,y,t) -> continuantPartOfAt(x,y,t)). 
+
+%PremiseIn is a sub-relation of continuantPartOfAt
+
+all x all y all t(suppositionIn(x,y,t) -> continuantPartOfAt(x,y,t)). 
+
+%SuppositionIn is a sub-relation of continuantPartOfAt
+
+all x all y all t(conclusionIn(x,y,t) -> continuantPartOfAt(x,y,t)).
+
+%ConclusionIn is a sub-relation of continuantPartOfAt 
+
+all x all y all t(subconclusionIn(x,y,t) -> continuantPartOfAt(x,y,t)). 
+
+%SubconclusionIn is a sub-relation of continuantPartOfAt
+
+all x all y all t(isCreatedBy(x,y,t) -> outputOf(x,y,t)). 
+
+%Is created by a sub-relation of output of
+
+%*********************************
+%    RELATION CONSTRAINT AXIOMS  *
 %********************************* 
 
 all x all y all t(inputOf(x,y,t) -> (Continuant(x) & Process(y) & TemporalRegion(t))).
 
+%InputOf restricted to continuants, processes, and temporal regions
+
 all x all y all t(outputOf(x,y,t) -> (Continuant(x) & Process(y) & TemporalRegion(t))).
 
-all x all y all t(hasArgumentContextAt(x,y,t) -> ((Premise(x) | Conclusion(x) | Supposition(x) | Subconclusion(x)) & Argument(y) & TemporalRegion(t))).
+%OutputOf restricted to continuants, processes, and temporal regions
 
-all x all y all t(isCreatedBy(x,y,t) -> (Argument(x) & ActOfArgumentCreation(y) & TemporalRegion(t))). 
+all x all y all t(isCreatedBy(x,y,t) -> ((Argument(x) | ComplexArgument(x)) & ActOfArgumentCreation(y) & TemporalRegion(t))). 
 
-%**********************************
-% RELATION FORMAL PROPERTY AXIOMS *
-%********************************** 
+%IsCreatedBy restricted to arguments, acts of argument creatin, and temporal regions
 
-all x all y all z all t((Premise(x) & hasArgumentContextAt(x,y,t) & hasArgumentContextAt(x,z,t))-> y=z).
+all x all y all t(premiseIn(x,y,t) -> (SentenceContent(x) & Argument(y) & TemporalRegion(t) & continuantPartOfAt(x,y,t) & exists z exists w exists u(ActOfAffirming(z) & outputOf(x,z,t) & ActOfInferring(w) & inputOf(x,w,t) & ActOfArgumentCreation(u) & isCreatedBy(y,u,t) & properOccurrentPartOf(z,u) & properOccurrentPartOf(w,u)))).
 
-all x all y all z all t((Conclusion(x) & hasArgumentContextAt(x,y,t) & hasArgumentContextAt(x,z,t))-> y=z).
+%Premise in holds between sentence content and argument at a time, and requires the existence of some act of affirming of which the sentence content is the output  
 
-all x all y all z all t((Supposition(x) & hasArgumentContextAt(x,y,t) & hasArgumentContextAt(x,z,t))-> y=z).
+all x all y all t(conclusionIn(x,y,t) -> (SentenceContent(x) & Argument(y) & TemporalRegion(t) & continuantPartOfAt(x,y,t) & exists z exists w exists u((ActOfAffirming(z) | ActOfAccepting(z)) & outputOf(x,z,t) & ActOfInferring(w) & outputOf(x,w,t) & ActOfArgumentCreation(u) & properOccurrentPartOf(z,u) & isCreatedBy(y,u,t) & properOccurrentPartOf(w,u)))).
 
-all x all y all z all t((isCreatedBy(x,y,t) & isCreatedBy(z,y,t))-> x=z).
+%Conclusion in holds between sentence content and argument at a time, and requires the existence of some act of affirming or accepting of which the content is the output  
 
-all x all y all z all t((isCreatedBy(x,y,t) & isCreatedBy(x,z,t))-> y=z).
+all x all y all t(suppositionIn(x,y,t) -> (SentenceContent(x) & Argument(y) & TemporalRegion(t) & continuantPartOfAt(x,y,t) & exists z exists w exists u(ActOfAccepting(z) & outputOf(x,z,t) & ActOfInferring(w) & inputOf(x,w,t) & ActOfArgumentCreation(u) & properOccurrentPartOf(z,u) & isCreatedBy(y,u,t) & properOccurrentPartOf(w,u)))).
 
-all x all y all t ((ComplexArgument(x) & ActOfArgumentCreation(y) & TemporalRegion(t) & isCreatedBy(x,y,t))->(exists z (ActOfArgumentCreation(z) & -(z=y) & occurrentPartOf(z,y)))). 
+%Supposition in holds between sentence content and argument at a time, and requires the existence of some act of accepting of which the content is the output 
 
-all x all y all z all t((ActOfInferring(x) & ActOfArgumentCreation(y) & occurrentPartOf(x,y) & Statement(z) & (inputOf(z,x,t) | outputOf(z,x,t)))->exists w(hasArgumentContextAt(z,w,t) & isCreatedBy(w,y,t))).
+all x all y all t(subconclusionIn(x,y,t) -> (SentenceContent(x) & ComplexArgument(y) & TemporalRegion(t) & (premiseIn(x,y,t) | suppositionIn(x,y,t)) & exists z(Argument(z) & properContinuantPartOfAt(z,y,t) & conclusionIn(x,z,t)))).  
 
-all x all y all z all t((ActOfSupposing(x) & ActOfArgumentCreation(y) & occurrentPartOf(x,y) & Statement(z) & (inputOf(z,x,t) | outputOf(z,x,t)))->exists w(hasArgumentContextAt(z,w,t) & isCreatedBy(w,y,t))).
+%SubconclusionIn holds between sentence content and complex argument where content is itemIn continuant parts of commplex argument  
+ 
+%*********************************
+%     A-BOX TEST CASES           *
+%*********************************
 
-%**********************************
-%      THEOREMS/MODELS            *
-%********************************** 
+%VERIFIED
+%SentenceContent(a).  
+%Argument(b). 
+%ActOfArgumentCreation(c). 
+%ComplexArgument(d). 
+%premiseIn(e,f,t). 
+%conclusionIn(g,h,t).
+%suppositionIn(i,j,t).
+%subconclusionIn(k,l,t).
 
-%all x all t(-hasArgumentContextAt(x,x,t)). 
-%IRREFLEXIVE (PROVED)
+%VERIFIED
+%SentenceContent(a) & SentenceContent(b) & SentenceContent(c) & -(a=b & b=c & a=c).  
+%Argument(d). 
+%ActOfArgumentCreation(e). 
+%ComplexArgument(f). 
+%premiseIn(a,d,t) & premiseIn(a,f,t).  
+%conclusionIn(b,f,t) & conclusionIn(b,d,t).
+%subconclusionIn(b,f,t).
 
-%all x all y all t(hasArgumentContextAt(x,y,t) -> -hasArgumentContextAt(y,x,t)). 
-%ASYMMETRIC (PROVED)
+%VERIFIED
+%SentenceContent(a) & SentenceContent(b) & -(a=b).  
+%Argument(d). 
+%ActOfArgumentCreation(e). 
+%suppositionIn(a,d,t) & suppositionIn(a,f,t).  
+%conclusionIn(b,f,t) & conclusionIn(b,d,t).
 
-%all x all t(-isCreatedBy(x,x,t)). 
-%IRREFLEXIVE (PROVED)
+%*********************************
+%     THEOREMS                   *
+%*********************************
 
-%all x all y all t(isCreatedBy(x,y,t) -> -isCreatedBy(y,x,t)). 
-%ASYMMETRIC (PROVED)
+all x all y all t(premiseIn(x,y,t) -> -(premiseIn(y,x,t))).
 
-%all x all y all z ((ActOfInferring(x) & ActOfArgumentCreation(y) & ActOfArgumentCreation(z) & occurrentPartOf(x,y) & occurrentPartOf(x,z))->y=z). 
-%COUNTERMODEL (PROVED) parthood is transitive, so we want x to be possibly part of y and z if y is part of z
+%PremiseIn is asymmetric. NB: Similarly for conclusionIn and suppositionIn
 
-%all x all y all z ((ActOfInferring(x) & ActOfArgumentCreation(y) & ActOfArgumentCreation(z) & occurrentPartOf(x,y) & occurrentPartOf(y,z))->occurrentPartOf(x,z)). 
-%TRANSITIVITY (PROVED)
+-(exists x exists t(premiseIn(x,x,t))). 
 
-%all x all y all z all t((Premise(x) & hasArgumentContextAt(x,y,t) & ActOfInferring(z) & inputOf(x,z,t))-> exists w(ActOfArgumentCreation(w) & occurrentPartOf(z,w) & isCreatedBy(y,w,t))). 
-%(PROVED)
+%PremiseIn is irreflexive. NB: Similarly for conclusionIn and suppositionIn
 
-%all x all y all z all t((Conclusion(x) & hasArgumentContextAt(x,y,t) & ActOfInferring(z) & outputOf(x,z,t))-> exists w(ActOfArgumentCreation(w) & occurrentPartOf(z,w) & isCreatedBy(y,w,t))). 
-%(PROVED)
+all x all y all t((SentenceContent(x) & TemporalRegion(t) & ActOfAffirming(y) & outputOf(x,y,t))-> -(ActOfAccepting(y))).
 
-%all x all y all z all t((Conclusion(x) & hasArgumentContextAt(x,y,t) & ActOfSupposing(z) & outputOf(x,z,t))-> exists w(ActOfArgumentCreation(w) & occurrentPartOf(z,w) & isCreatedBy(y,w,t))). 
-%(PROVED)
+%Output of act of affirming is not act of accepting. Trivial from disjointness axioms 
 
-%all x all y all z all t((Supposition(x) & hasArgumentContextAt(x,y,t) & ActOfSupposing(z) & inputOf(x,z,t))-> exists w(ActOfArgumentCreation(w) & occurrentPartOf(z,w) & isCreatedBy(y,w,t))). 
-%(PROVED)
+all x all y all t((SentenceContent(x) & TemporalRegion(t) & ActOfAccepting(y) & outputOf(x,y,t))-> -(ActOfAffirming(y))).
+
+%Output of act of accepting is not act of affirming. Trivial due to disjointness axioms 
+
+all x (Argument(x) -> exists y exists z exists t (SentenceContent(y) & (premiseIn(y,x,t) | suppositionIn(y,x,t)))). 
+
+%Any argument entails the existence of some content that is a premise or supposition in that argument
+
+all x (Argument(x) -> exists y exists z exists t (SentenceContent(y) & conclusionIn(y,x,t))). 
+
+%Any argument entails the existence of some content that is a conclusion in that argument 
+
+all x all y all z all t((premiseIn(x,y,t) & continuantPartOfAt(y,z,t)) -> continuantPartOfAt(x,z,t)). 
+
+%Any premise x that is part of an argument y that is part of some other z, is part of z as well
+
+all x all y all t((ComplexArgument(x) & conclusionIn(y,x,t))-> exists z(properContinuantPartOfAt(z,x,t) & conclusionIn(y,z,t))).
+
+%If x is a conclusion in a complex argument then x is a conclusion in a proper part of the complex
+
+all x all y all z all t((ActOfArgumentCreation(x) & ComplexArgument(y) & isCreatedBy(y,x,t) & Argument(z) & properContinuantPartOfAt(z,y,t)) -> exists w(ActOfArgumentCreation(w) & isCreatedBy(z,w,t) & occurrentPartOf(w,x))).  
+
+%Creation of complex arguments entails creation of arguments relevantly linked to complex and creation act
+
+all x(ComplexArgument(x) -> exists y exists t(properContinuantPartOfAt(y,x,t) & (Argument(y) | ComplexArgument(y) | SentenceContent(y)))). 
+
+%Complex arguments have argument, complex argument, or sentence content parts
+
+all x all y all t((ActOfArgumentCreation(x) & TemporalRegion(t) & isCreatedBy(y,x,t)) -> Argument(y)).
+
+%Act of argument creation is closed under arguments; also permits creation of ComplexArgument 
+
+all x(Argument(x) -> exists y exists t(ActOfArgumentCreation(y) & TemporalRegion(t) & isCreatedBy(x,y,t))). 
+
+%Any argument entails the existence of an act of argument creation of which the argument is created at some time 
+
+

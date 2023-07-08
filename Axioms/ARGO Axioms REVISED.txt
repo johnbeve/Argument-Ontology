@@ -373,6 +373,7 @@ all x all y all z all t((ActOfArgumentCreation(x) & ComplexArgument(y) & isCreat
 all x(ComplexArgument(x) -> exists y exists t(properContinuantPartOfAt(y,x,t) & (Argument(y) | ComplexArgument(y) | SentenceContent(y)))). 
 
 %Complex arguments have argument, complex argument, or sentence content parts
+%Need to explore closure in each direction...
 
 all x all y all t((ActOfArgumentCreation(x) & TemporalRegion(t) & isCreatedBy(y,x,t)) -> Argument(y)).
 

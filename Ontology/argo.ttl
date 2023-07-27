@@ -1,0 +1,424 @@
+@prefix : <http://www.github/argO/2016/9/argumentsontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix test: <http://github.org/test#> .
+@prefix argumentsontology: <http://www.github/argO/2016/9/argumentsontology#> .
+@base <http://www.github/argO/2016/9/argumentsontology> .
+
+<http://www.github/argO/2016/9/argumentsontology> rdf:type owl:Ontology ;
+                                                   owl:imports <http://purl.obolibrary.org/obo/iao/slim.owl.> ,
+                                                               <http://www.ifomis.org/bfo/1.1> ;
+                                                   test:testbe2221bc_d4e7_444b_8efe_5e4e837e77e7 "ArgO: An Arguments Ontology is a small ontology created to facilitate the representation of arguments and their components: premises, conclusions, subconclusions, and suppositions."@en ;
+                                                   test:test0943e07c_ff8f_4dcc_bc0b_dbee849f4e0a "Spring 2018"@en ;
+                                                   owl:versionInfo "Arguments Ontology (ArgO) v .3 -- development release"@en ;
+                                                   test:test4081ea94_ecbe_4908_94d3_7d6e0d99d226 "J. Neil Otte, John Beverley, Francesco Franda, Yonatan Schrieber, Brian Donohue, and Alexander P. Cox."@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://github.org/test#test0943e07c_ff8f_4dcc_bc0b_dbee849f4e0a
+test:test0943e07c_ff8f_4dcc_bc0b_dbee849f4e0a rdf:type owl:AnnotationProperty ;
+                                              rdfs:label "publication date"@en ;
+                                              rdfs:subPropertyOf owl:versionInfo .
+
+
+###  http://github.org/test#test09663a1f_df1d_42fb_b15f_9b84e1981fbc
+test:test09663a1f_df1d_42fb_b15f_9b84e1981fbc rdf:type owl:AnnotationProperty ;
+                                              rdfs:label "synonym"@en ;
+                                              rdfs:subPropertyOf rdfs:comment .
+
+
+###  http://github.org/test#test4081ea94_ecbe_4908_94d3_7d6e0d99d226
+test:test4081ea94_ecbe_4908_94d3_7d6e0d99d226 rdf:type owl:AnnotationProperty ;
+                                              rdfs:label "created by"@en ;
+                                              rdfs:subPropertyOf owl:versionInfo .
+
+
+###  http://github.org/test#test6c58c70d_1fcf_4414_be44_85e5cba8571b
+test:test6c58c70d_1fcf_4414_be44_85e5cba8571b rdf:type owl:AnnotationProperty ;
+                                              rdfs:label "term editor"@en ;
+                                              rdfs:subPropertyOf owl:versionInfo .
+
+
+###  http://github.org/test#testbe2221bc_d4e7_444b_8efe_5e4e837e77e7
+test:testbe2221bc_d4e7_444b_8efe_5e4e837e77e7 rdf:type owl:AnnotationProperty ;
+                                              rdfs:label "Description"@en ;
+                                              rdfs:subPropertyOf rdfs:comment .
+
+
+###  http://github.org/test#teste8bb6cb2_117b_4bfe_b5a6_a95b6576a498
+test:teste8bb6cb2_117b_4bfe_b5a6_a95b6576a498 rdf:type owl:AnnotationProperty ;
+                                              rdfs:label "definition"@en ;
+                                              rdfs:subPropertyOf rdfs:comment .
+
+
+###  http://www.github/argO/2016/9/argumentsontology/example
+:example rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://github.org/test#conclusionIn
+test:conclusionIn rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000050> ;
+                  owl:inverseOf test:test1e670887_78da_4b5c_b223_199c5e210124 ;
+                  rdfs:domain :sentencecontent ;
+                  rdfs:range :argument ;
+                  rdfs:label "conclusion in"@en .
+
+
+###  http://github.org/test#premiseIn
+test:premiseIn rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000050> ;
+               owl:inverseOf test:testc6fb2b0a_dac8_4743_a586_ab0b85cdcfb7 ;
+               rdfs:domain :sentencecontent ;
+               rdfs:range :argument ;
+               rdfs:label "premise in"@en .
+
+
+###  http://github.org/test#test077698da_f407_4ef7_990c_09e0fd31755b
+test:test077698da_f407_4ef7_990c_09e0fd31755b rdf:type owl:ObjectProperty ;
+                                              owl:inverseOf test:test24ea7b77_dc44_424d_8447_6df6c91946b5 ;
+                                              rdfs:label "supports"@en .
+
+
+###  http://github.org/test#test1e670887_78da_4b5c_b223_199c5e210124
+test:test1e670887_78da_4b5c_b223_199c5e210124 rdf:type owl:ObjectProperty ;
+                                              rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000051> ;
+                                              rdfs:domain :argument ;
+                                              rdfs:label "has conclusion"@en .
+
+
+###  http://github.org/test#test24ea7b77_dc44_424d_8447_6df6c91946b5
+test:test24ea7b77_dc44_424d_8447_6df6c91946b5 rdf:type owl:ObjectProperty ;
+                                              rdfs:label "is supported by"@en .
+
+
+###  http://github.org/test#testc6fb2b0a_dac8_4743_a586_ab0b85cdcfb7
+test:testc6fb2b0a_dac8_4743_a586_ab0b85cdcfb7 rdf:type owl:ObjectProperty ;
+                                              rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000051> ;
+                                              rdfs:domain :argument ;
+                                              rdfs:label "has premise"@en .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000050
+<http://purl.obolibrary.org/obo/BFO_0000050> rdf:type owl:ObjectProperty ;
+                                             owl:inverseOf <http://purl.obolibrary.org/obo/BFO_0000051> ;
+                                             rdf:type owl:TransitiveProperty ;
+                                             rdfs:label "part of"@en .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000051
+<http://purl.obolibrary.org/obo/BFO_0000051> rdf:type owl:ObjectProperty ,
+                                                      owl:TransitiveProperty ;
+                                             test:teste8bb6cb2_117b_4bfe_b5a6_a95b6576a498 "A core relation that holds between a whole and its part."@en ;
+                                             <http://purl.obolibrary.org/obo/IAO_0000119> "BFO 2.0"@en ;
+                                             rdfs:label "has part"@en .
+
+
+###  http://www.github/argO/2016/9/argumentsontology#creates
+argumentsontology:creates rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf <http://www.ontologyrepository.com/CommonCoreOntologies/has_output> ;
+                          owl:inverseOf argumentsontology:iscreatedby .
+
+
+###  http://www.github/argO/2016/9/argumentsontology#haspropercontinuantpart
+argumentsontology:haspropercontinuantpart rdf:type owl:ObjectProperty ;
+                                          rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000051> ;
+                                          owl:inverseOf argumentsontology:propercontinuantpartof ;
+                                          rdfs:domain <http://www.ifomis.org/bfo/1.1/snap#Continuant> ;
+                                          rdfs:range <http://www.ifomis.org/bfo/1.1/snap#Continuant> ;
+                                          test:teste8bb6cb2_117b_4bfe_b5a6_a95b6576a498 "X has proper continuant part Y where X and Y are both continuants and X is part of Y but X is not identical to Y."@en ;
+                                          rdfs:label "has proper continuant part"@en .
+
+
+###  http://www.github/argO/2016/9/argumentsontology#iscreatedby
+argumentsontology:iscreatedby rdf:type owl:ObjectProperty ;
+                              rdfs:subPropertyOf <http://www.ontologyrepository.com/CommonCoreOntologies/is_output_of> ;
+                              rdf:type owl:AsymmetricProperty ,
+                                       owl:IrreflexiveProperty ;
+                              rdfs:domain <http://www.ifomis.org/bfo/1.1/snap#Continuant> ;
+                              rdfs:range <http://www.ifomis.org/bfo/1.1/span#Process> ;
+                              test:teste8bb6cb2_117b_4bfe_b5a6_a95b6576a498 "X is created by Y iff X is output of Y and the terminal boundary of the temporal region (W) on which Y occurs interval_meets a terminal region (Z) at which X exists and X does not exist at W."@en ;
+                              <http://purl.obolibrary.org/obo/IAO_0000117> "J. Neil Otte"@en ;
+                              :example "An argument is created by some act of argument creation"@en ;
+                              rdfs:label "is created by"@en .
+
+
+###  http://www.github/argO/2016/9/argumentsontology#propercontinuantpartof
+argumentsontology:propercontinuantpartof rdf:type owl:ObjectProperty ;
+                                         rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000050> ;
+                                         rdf:type owl:TransitiveProperty ;
+                                         rdfs:label "proper continuant part of"@en .
+
+
+###  http://www.github/argO/2016/9/argumentsontology/has_supposition
+:has_supposition rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000051> ;
+                 owl:inverseOf :suppositionIn ;
+                 rdfs:label "has supposition"@en .
+
+
+###  http://www.github/argO/2016/9/argumentsontology/suppositionIn
+:suppositionIn rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000050> ;
+               rdfs:domain :sentencecontent ;
+               rdfs:range :argument ;
+               rdfs:label "supposition in"@en .
+
+
+###  http://www.ontologyrepository.com/CommonCoreOntologies/has_input
+<http://www.ontologyrepository.com/CommonCoreOntologies/has_input> rdf:type owl:ObjectProperty ;
+                                                                   owl:inverseOf <http://www.ontologyrepository.com/CommonCoreOntologies/is_input_of> ;
+                                                                   rdfs:domain <http://www.ifomis.org/bfo/1.1/span#Process> ;
+                                                                   rdfs:range <http://www.ifomis.org/bfo/1.1/snap#Continuant> ;
+                                                                   test:teste8bb6cb2_117b_4bfe_b5a6_a95b6576a498 "Inverse of is_input_of, a relation between a Processual Entity and a Continuant such that the presence of the Continuant at the beginning of the Processual Entity is a necessary condition for the start of the Processual Entity. (Source: Extended Relations Ontology / CCO)"@en ;
+                                                                   rdfs:label "has input"@en .
+
+
+###  http://www.ontologyrepository.com/CommonCoreOntologies/has_output
+<http://www.ontologyrepository.com/CommonCoreOntologies/has_output> rdf:type owl:ObjectProperty ;
+                                                                    owl:inverseOf <http://www.ontologyrepository.com/CommonCoreOntologies/is_output_of> ;
+                                                                    test:teste8bb6cb2_117b_4bfe_b5a6_a95b6576a498 "Inverse of is_output_of, a relation between a Processual Entity and a Continuant such that the presence of the Continuant at the end of the Processual Entity is a necessary condition for the completion of the Processual Entity (Source: Extended Relations Ontology / CCO)"@en ;
+                                                                    rdfs:label "has output"@en .
+
+
+###  http://www.ontologyrepository.com/CommonCoreOntologies/has_process_part
+<http://www.ontologyrepository.com/CommonCoreOntologies/has_process_part> rdf:type owl:ObjectProperty ;
+                                                                          owl:inverseOf <http://www.ontologyrepository.com/CommonCoreOntologies/is_part_of_process> ;
+                                                                          <http://purl.obolibrary.org/obo/IAO_0000115> "For processes P1 and P2, P1 has process part P2 if and only if P2 occurs on a temporal interval that is during the temporal interval of P1 and P2 either provides an input to P1, recieves an output of p1 or both. (Source: Extended Relations Ontology / CCO)"@en ;
+                                                                          rdfs:label "has process part"@en .
+
+
+###  http://www.ontologyrepository.com/CommonCoreOntologies/is_input_of
+<http://www.ontologyrepository.com/CommonCoreOntologies/is_input_of> rdf:type owl:ObjectProperty ;
+                                                                     rdfs:label "is input of"@en .
+
+
+###  http://www.ontologyrepository.com/CommonCoreOntologies/is_output_of
+<http://www.ontologyrepository.com/CommonCoreOntologies/is_output_of> rdf:type owl:ObjectProperty ;
+                                                                      rdfs:label "is output of"@en .
+
+
+###  http://www.ontologyrepository.com/CommonCoreOntologies/is_part_of_process
+<http://www.ontologyrepository.com/CommonCoreOntologies/is_part_of_process> rdf:type owl:ObjectProperty ;
+                                                                            <http://purl.obolibrary.org/obo/IAO_0000115> "For processes P1 and P2, P1 has process part P2 if and only if P2 occurs on a temporal interval that is during the temporal interval of P1 and P2 either provides an input to P1, recieves an output of p1 or both. (Source: Extended Relations Ontology / CCO)"@en ;
+                                                                            rdfs:label "is process part of"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.obolibrary.org/obo/IAO_0000030
+<http://purl.obolibrary.org/obo/IAO_0000030> rdf:type owl:Class ;
+                                             rdfs:subClassOf <http://www.ifomis.org/bfo/1.1/snap#GenericallyDependentContinuant> .
+
+
+###  http://www.github/argO/2016/9/argumentsontology#actofinferring
+argumentsontology:actofinferring rdf:type owl:Class ;
+                                 rdfs:subClassOf :languageact ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty <http://www.ontologyrepository.com/CommonCoreOntologies/has_input> ;
+                                                   owl:someValuesFrom :sentencecontent
+                                                 ] ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty <http://www.ontologyrepository.com/CommonCoreOntologies/has_output> ;
+                                                   owl:someValuesFrom :sentencecontent
+                                                 ] ;
+                                 test:test09663a1f_df1d_42fb_b15f_9b84e1981fbc "inferring"@en ;
+                                 test:teste8bb6cb2_117b_4bfe_b5a6_a95b6576a498 """A language act in which an agent uses one or more sentence contents to support, justify, entail, or assert the truth of another statement.
+(Note: Act of Inferring should be defined as something like \"A language act in which an agent indicates a relation between sentence contents such that some set of sentence contents provide reasons for holding another sentence content, as entailment, support, or justification.\")"""@en ;
+                                 <http://purl.obolibrary.org/obo/IAO_0000117> "Yonatan Schrieber"@en ;
+                                 rdfs:label "act of inferring"@en .
+
+
+###  http://www.github/argO/2016/9/argumentsontology#complexargument
+argumentsontology:complexargument rdf:type owl:Class ;
+                                  rdfs:subClassOf :argument ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty argumentsontology:haspropercontinuantpart ;
+                                                    owl:someValuesFrom :argument
+                                                  ] ;
+                                  test:test6c58c70d_1fcf_4414_be44_85e5cba8571b "J. Neil Otte"@en ;
+                                  test:teste8bb6cb2_117b_4bfe_b5a6_a95b6576a498 "An argument that has some argument as a proper continuant part, and thus also some subconclusion."@en ;
+                                  rdfs:label "complex argument"@en .
+
+
+###  http://www.github/argO/2016/9/argumentsontology/actofaccepting
+:actofaccepting rdf:type owl:Class ;
+                rdfs:subClassOf :languageact ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty <http://www.ontologyrepository.com/CommonCoreOntologies/has_output> ;
+                                  owl:someValuesFrom :sentencecontent
+                                ] ;
+                test:test09663a1f_df1d_42fb_b15f_9b84e1981fbc "supposing"@en ;
+                test:test6c58c70d_1fcf_4414_be44_85e5cba8571b "J. Neil Otte"@en ;
+                test:teste8bb6cb2_117b_4bfe_b5a6_a95b6576a498 "A language act in which one posits, imagines, pretends, entertains, or otherwise supposes some statement, typically for the purpose of using it to make an inference."@en ;
+                rdfs:label "act of accepting"@en .
+
+
+###  http://www.github/argO/2016/9/argumentsontology/actofaffirming
+:actofaffirming rdf:type owl:Class ;
+                rdfs:subClassOf :languageact ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty <http://www.ontologyrepository.com/CommonCoreOntologies/has_output> ;
+                                  owl:someValuesFrom :sentencecontent
+                                ] ;
+                test:test6c58c70d_1fcf_4414_be44_85e5cba8571b "J. Neil Otte"@en ;
+                test:teste8bb6cb2_117b_4bfe_b5a6_a95b6576a498 "a language act in which a sentence content is stated implicitly or explicitly in a forceful or confident manner, which conveys to others that the agent of the language act believes or has confidence in the truth or accuracy of the sentence content."@en ;
+                rdfs:label "act of affirming"@en .
+
+
+###  http://www.github/argO/2016/9/argumentsontology/actofarguing
+:actofarguing rdf:type owl:Class ;
+              rdfs:subClassOf :languageact ;
+              test:test6c58c70d_1fcf_4414_be44_85e5cba8571b "J. Neil Otte"@en ;
+              test:teste8bb6cb2_117b_4bfe_b5a6_a95b6576a498 "A language act in which one creates an argument or uses an argument with the purpose of convincing others that the conclusion of the argument is true or compelling."@en ;
+              rdfs:comment "Note: \"Act of Arguing\" differs from \"Act of Argument Creation\" in two respects: first, one can argue for some conclusion without creating an argument (e.g. by merely reusing an available argument); secondly, one can create an argument in an act of argument creation without any intention of convincing others of the truth of the conclusion. Therefore, 'act of arguing' is synonymous with 'trying to convince someone on the basis of reasons', whereas 'act of argument creation' explicitly involves coming up with an argument."@en ;
+              rdfs:label "act of arguing"@en .
+
+
+###  http://www.github/argO/2016/9/argumentsontology/actofargumentcreation
+:actofargumentcreation rdf:type owl:Class ;
+                       rdfs:subClassOf :languageact ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty <http://www.ontologyrepository.com/CommonCoreOntologies/has_output> ;
+                                         owl:someValuesFrom :argument
+                                       ] ;
+                       test:test6c58c70d_1fcf_4414_be44_85e5cba8571b "J. Neil Otte"@en ;
+                       test:teste8bb6cb2_117b_4bfe_b5a6_a95b6576a498 "A language act in which an agent creates an argument by combining one or more premises or suppositions to support a conclusion."@en ;
+                       rdfs:label "act of argument creation"@en .
+
+
+###  http://www.github/argO/2016/9/argumentsontology/argument
+:argument rdf:type owl:Class ;
+          rdfs:subClassOf :collectionofsentencecontents ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty argumentsontology:iscreatedby ;
+                            owl:someValuesFrom :actofargumentcreation
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty test:test1e670887_78da_4b5c_b223_199c5e210124 ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :sentencecontent
+                          ] ;
+          test:test6c58c70d_1fcf_4414_be44_85e5cba8571b "J. Neil Otte"@en ;
+          test:teste8bb6cb2_117b_4bfe_b5a6_a95b6576a498 "An ordered collection of sentence contents that consists of at least one premise or supposition, and possibly one or more subconclusions, where from these parts exactly one conclusion is inferred, supported, or justified."@en ;
+          :example "All men are mortal. Socrates is a man. Therefore, Socrates is mortal."@en ;
+          rdfs:comment "Note: A single sentence content may form an argument, but it would need to bear both a 'has premise' and 'has conclusion' relation to the argument."@en ;
+          rdfs:label "argument"@en .
+
+
+###  http://www.github/argO/2016/9/argumentsontology/collectionofsentencecontents
+:collectionofsentencecontents rdf:type owl:Class ;
+                              rdfs:subClassOf <http://purl.obolibrary.org/obo/IAO_0000030> ;
+                              test:test6c58c70d_1fcf_4414_be44_85e5cba8571b "J. Neil Otte"@en ;
+                              test:teste8bb6cb2_117b_4bfe_b5a6_a95b6576a498 "An information content entity that consists of two or more sentence contents."@en ;
+                              rdfs:comment "Note: Collections are distinct from the related notions of sets and aggregates. Unlike sets, which can not have the same member twice, a collection can have the same item more than once. Also, unlike aggregates (see BFO Reference 2.0), for any collection C, if b if an item of C, then it is not a restriction on C  there exists_at t a mutually exhaustive and pairwise disjoint partition of C into continuants x1,  …, xn (for some n > 1) with b = xi for some 1 ≤ i ≤ n."@en ;
+                              rdfs:label "collection of sentence contents"@en .
+
+
+###  http://www.github/argO/2016/9/argumentsontology/languageact
+:languageact rdf:type owl:Class ;
+             rdfs:subClassOf <http://www.ontologyrepository.com/CommonCoreOntologies/IntentionalAct> ;
+             test:test6c58c70d_1fcf_4414_be44_85e5cba8571b "Yonatan Schrieber"@en ;
+             test:teste8bb6cb2_117b_4bfe_b5a6_a95b6576a498 "An intentional process undertaken by an agent through the use of a language."@en ;
+             rdfs:comment "Note: Language acts include speech acts and document acts, and are a subclass of the broader class of social acts (see Reinach on social acts)"@en ;
+             rdfs:label "language act"@en .
+
+
+###  http://www.github/argO/2016/9/argumentsontology/sentencecontent
+:sentencecontent rdf:type owl:Class ;
+                 rdfs:subClassOf <http://purl.obolibrary.org/obo/IAO_0000030> ;
+                 test:test6c58c70d_1fcf_4414_be44_85e5cba8571b "J. Neil Otte"@en ;
+                 test:teste8bb6cb2_117b_4bfe_b5a6_a95b6576a498 "An information content entity that is the content or meaning typically expressed in an atomic sentence in a language."@en ;
+                 :example "\"2+2 =5\""@en ,
+                          "\"Close the door!\""@en ,
+                          "\"Is the present King of France bald?\""@en ,
+                          "\"The man walked into the bar.\""@en ;
+                 rdfs:comment "Editor's note: Logicians usually speak of 'propositions' as reasons, premises, conclusions, and the like. For this purpose, we use the term 'statement' for reasons explained in 'ArgO: an arguments ontology 2018'. However, in an effort to remain open to other logics that have argument parts that do not consist solely of propositions, we use the term 'sentence content' as our broader category, which is designed also to represent the content of meaningful sentences that do not express propositions, such as imperatives and interrogatives. The definition is also designed to leave open whether or not a sentence content is conveyed in a form other than a sentence in a language, for instance, a stop sign."@en ;
+                 rdfs:label "sentence content"@en .
+
+
+###  http://www.github/argO/2016/9/argumentsontology/statement
+:statement rdf:type owl:Class ;
+           rdfs:subClassOf :sentencecontent ;
+           test:test6c58c70d_1fcf_4414_be44_85e5cba8571b "J. Neil Otte"@en ;
+           test:teste8bb6cb2_117b_4bfe_b5a6_a95b6576a498 "A sentence content that is the meaning of a declarative sentence in a language."@en ;
+           :example "\"All penguins can swim.\""@en ,
+                    "\"The present king of France is bald.\""@en ;
+           rdfs:comment "Note: 'Statement' is similar to what logicians often call 'propositions'; however, it is important to point out that, like all generically dependent continuants (GDCs) in Basic Formal Ontology, it is given quite a distinct account of grounding, which distinguishes it from common conceptions of propositions as Platonic, \"abstract\", or ungrounded entities. Statements, by contract, like all GDCs, will exist only so long as there is at least one bearer of them in existence."@en ;
+           rdfs:label "statement"@en .
+
+
+###  http://www.ontologyrepository.com/CommonCoreOntologies/IntentionalAct
+<http://www.ontologyrepository.com/CommonCoreOntologies/IntentionalAct> rdf:type owl:Class ;
+                                                                        rdfs:subClassOf <http://www.ifomis.org/bfo/1.1/span#Process> ;
+                                                                        test:teste8bb6cb2_117b_4bfe_b5a6_a95b6576a498 "An Act in which at least one Agent plays a causative role and which is prescribed by some Directive Information Content Entity held by at least one of the Agents. (Source: Event Ontology / CCO)"@en ;
+                                                                        <http://purl.obolibrary.org/obo/IAO_0000119> "http://www.ontologyrepository.com/CommonCoreOntologies/Mid/EventOntology"@en ;
+                                                                        rdfs:label "intentional act"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.github/argO/2016/9/argumentsontology/AA
+:AA rdf:type owl:NamedIndividual ,
+             :argument ;
+    test:test1e670887_78da_4b5c_b223_199c5e210124 :AA3 ;
+    test:testc6fb2b0a_dac8_4743_a586_ab0b85cdcfb7 :AA1 ,
+                                                  :AA2 .
+
+
+###  http://www.github/argO/2016/9/argumentsontology/AA1
+:AA1 rdf:type owl:NamedIndividual ,
+              :sentencecontent .
+
+
+###  http://www.github/argO/2016/9/argumentsontology/AA2
+:AA2 rdf:type owl:NamedIndividual ,
+              :statement .
+
+
+###  http://www.github/argO/2016/9/argumentsontology/AA3
+:AA3 rdf:type owl:NamedIndividual ,
+              :statement .
+
+
+###  http://www.github/argO/2016/9/argumentsontology/AB
+:AB rdf:type owl:NamedIndividual ,
+             :argument ;
+    test:test1e670887_78da_4b5c_b223_199c5e210124 :AB3 ;
+    test:testc6fb2b0a_dac8_4743_a586_ab0b85cdcfb7 :AA1 ,
+                                                  :AB2 .
+
+
+###  http://www.github/argO/2016/9/argumentsontology/AB2
+:AB2 rdf:type owl:NamedIndividual ,
+              :statement .
+
+
+###  http://www.github/argO/2016/9/argumentsontology/AB3
+:AB3 rdf:type owl:NamedIndividual ,
+              :statement .
+
+
+###  http://www.github/argO/2016/9/argumentsontology/AC
+:AC rdf:type owl:NamedIndividual ,
+             :argument ;
+    test:test1e670887_78da_4b5c_b223_199c5e210124 :AB3 ;
+    test:testc6fb2b0a_dac8_4743_a586_ab0b85cdcfb7 :AA1 ,
+                                                  :AA2 ,
+                                                  :AA3 ,
+                                                  :AB2 .
+
+
+###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi

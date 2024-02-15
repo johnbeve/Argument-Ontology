@@ -1,4 +1,4 @@
-# Argument-Ontology
+# Argument Ontology (ARGO)
 
 Although the last decade has seen a proliferation of ontological approaches to
 arguments, many of them employ ad hoc solutions to representing arguments, lack

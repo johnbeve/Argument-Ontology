@@ -15,4 +15,5 @@ hope that ArgO may assist researchers in many projects, including: integrating h
 sources of evidence, structuring the content of semantic wikis, and enhancing semantic
 reasoning.
 
-Keywords: Ontology, Arguments, Argumentation, Basic Formal Ontology, Semantic Reasoning
+## License
+The documents contained in this repository are licensed under the terms of the Creative Commons Attribution 4.0 International (CC BY 4.0) license.
